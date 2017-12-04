@@ -49,90 +49,63 @@ angular.module('app.routes', [])
                 controller: 'registroDocenteCtrl'
             })
 
-            .state('menu.miPerfil', {
-                url: '/perfil',
+            .state('loginall', {
+                url: '/loginall',
+                templateUrl: 'templates/loginall.html',
+                controller: 'loginallCtrl'
+            })
+
+            .state('menu.estudiante_panel', {
+                url: '/estudiante_panel',
+                params: {
+                    PHOMEWORK_cliente: ''
+                },
                 views: {
                     'side-menu21': {
-                        templateUrl: 'templates/miPerfil.html',
-                        controller: 'miPerfilCtrl'
+                        templateUrl: 'templates/estudiante_panel.html',
+                        controller: 'estudiante_panelCtrl'
                     }
                 }
             })
 
-            .state('menu.misReclamos', {
-                url: '/misreclamos',
-                params: {
-                    CRAWFORD_cliente: ''
-                },
+            .state('menu.mistareas', {
+                url: '/mistareas',
                 views: {
                     'side-menu21': {
-                        templateUrl: 'templates/misReclamos.html',
-                        controller: 'misReclamosCtrl'
+                        templateUrl: 'templates/mistareas.html',
+                        controller: 'mistareasCtrl'
                     }
                 }
             })
 
-            .state('menu.nuevoReclamo13', {
-                url: '/reclamo1',
+            .state('menu.tareaid', {
+                url: '/tareaid',
                 views: {
                     'side-menu21': {
-                        templateUrl: 'templates/nuevoReclamo13.html',
-                        controller: 'nuevoReclamo13Ctrl'
+                        templateUrl: 'templates/tareaid.html',
+                        controller: 'tareaidCtrl'
                     }
-                }
+                }                
             })
 
-            .state('nuevoReclamo23', {
-                url: '/reclamo2',
-                params: {
-                    cedula: "",
-                    nombreasegurado: "",
-                    apellidoasegurado: "",
-                    fechanacimientoasse: "",
-                    email: "",
-                    marca: "",
-                    tipo_seguro: "",
-                    aseguradora: "",
-                    ciudadrecidencia: "",
-                    telefonofijo: "",
-                    celular: "",
-                    direccion: "",
-                    telefonolaboral: ""
-                },
-                templateUrl: 'templates/nuevoReclamo23.html',
-                controller: 'nuevoReclamo23Ctrl'
+            .state('menu.descubre', {
+                url: '/descubre',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/descubre.html',
+                        controller: 'descubreCtrl'
+                    }
+                }                
             })
 
-            .state('nuevoReclamo33', {
-                url: '/reclamo3',
-                params: {
-                    reclamoid: "",
-                    cedula: "",
-                    nombreasegurado: "",
-                    apellidoasegurado: "",
-                    fechanacimientoasse: "",
-                    ciudadrecidencia: "",
-                    telefonofijo: "",
-                    celular: "",
-                    direccion: "",
-                    email: "",
-                    telefonolaboral: "",
-                    producto: "",
-                    jsonrespuestaform: "",
-                    tipo_poliza: ""
-                },
-                templateUrl: 'templates/nuevoReclamo33.html',
-                controller: 'nuevoReclamo33Ctrl'
-            })
-
-            .state('checklist', {
-                url: '/checklist',
-                params: {
-                    id_reclamo: "",
-                    tipo_poliza: ""
-                },
-                templateUrl: 'templates/checklist.html',
-                controller: 'checklistCtrl'
+            .state('menu.mistokens', {
+                url: '/mistokens',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/mistokens.html',
+                        controller: 'mistokensCtrl'
+                    }
+                }                 
             })
 
             .state('escanear', {
@@ -146,15 +119,10 @@ angular.module('app.routes', [])
                 controller: 'escanearCtrl'
             })
 
-            .state('grabarAudio', {
-                url: '/audio',
-                params: {
-                    id_reclamo: "",
-                    id_checklist: "",
-                    tipo_poliza: ""
-                },
-                templateUrl: 'templates/grabarAudio.html',
-                controller: 'grabarAudioCtrl'
+            .state('payu', {
+                url: '/payu',
+                templateUrl: 'templates/payu.html',
+                controller: 'payuCtrl'
             })
 
             .state('menu.caso1402', {

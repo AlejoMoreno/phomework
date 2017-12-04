@@ -112,7 +112,7 @@ angular.module('app.controllers', [])
             };
 
             $scope.gologin = function(){
-                $state.go('login');
+                $state.go('loginall');
             };
 
             
@@ -172,7 +172,7 @@ angular.module('app.controllers', [])
             };
 
             $scope.gologin = function(){
-                $state.go('login');
+                $state.go('loginall');
             };
 
         }])
@@ -182,7 +182,10 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
-            
+            $scope.gologin = function(){
+                $state.go('loginall');
+            };
+
         }])
 
     .controller('registroDocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -190,11 +193,13 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state, $ionicLoading) {
 
-
+            $scope.gologin = function(){
+                $state.go('loginall');
+            };
             
         }])
 
-    .controller('miPerfilCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('loginallCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
@@ -223,496 +228,205 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $scope.login = function(){
+                $state.go('menu.estudiante_panel');
+            };
+
         }])
 
-    .controller('misReclamosCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('estudiante_panelCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
-            //trar los datos de id
-            $scope.misReclamos_data = $stateParams;
-
-            //intervalos de 3 segundos y refresca los Datos
-            this.task = setInterval(() => {
-                $scope.refreshData();
-              }, 1000);
-
-            $scope.refreshData = function(){
-                //traer todos los reclamos
-                    $http({
-                        url: host + '/reclamos/cliente/' + localStorage.getItem("CRAWFORD_cliente"),
-                        method: "GET"
-                    }).then(function (result) {
-                        console.log(result);
-                        $scope.casos = result.data.body;
-                    }, function (err) {
-                        console.log(err);
-                    });
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    $state.go('loginall');
+                } else {
+                    $state.go("menu.estudiante_panel");
+                }
+                
             };
-            
-
-            $scope.go_checklist = function (id_reclamo, tipo_poliza) {
-                $state.go('checklist', {
-                    "id_reclamo": id_reclamo,
-                    "tipo_poliza": tipo_poliza
-                });
+            $scope.go_fqs = function(){
+                alert('preguntas frecuentes');
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                alert('notificaciones');
+                $state.go();
+            };
+            $scope.go_miperfil = function(){
+                alert('mi perfil');
+                $state.go();
             };
 
-            $scope.go_block = function(id_reclamo, tipo_poliza){
-                $state.go('menu.caso1402', {
-                    "id_reclamo": id_reclamo,
-                    "tipo_poliza": tipo_poliza,
-                    "ayuda": "Caso en estudio"
-                });
+
+            $scope.go_mistareas = function(){
+                $state.go('menu.mistareas');
+            };
+            $scope.go_mistokens = function(){
+                $state.go('menu.mistokens');
+            };
+            $scope.go_subirtarea = function(){
+                $state.go('menu.subirtarea');
+            };
+            $scope.go_chatsoporte = function(){
+                $state.go('menu.chat');
             };
 
         }])
 
-    .controller('nuevoReclamo13Ctrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
-            $scope.form = {
-                'cedula': localStorage.getItem("CRAWFORD_cedula"),
-                'nombreasegurado': localStorage.getItem("CRAWFORD_nombre"),
-                'apellidoasegurado': localStorage.getItem("CRAWFORD_apellido"),
-                'fechanacimientoasse': new Date(localStorage.getItem("CRAWFORD_fechanacimiento")),
-                'email': localStorage.getItem("CRAWFORD_email"),
-
-                'marca': localStorage.getItem("CRAWFORD_marca"),
-                'tipo_seguro': localStorage.getItem("CRAWFORD_tipo_seguro"),
-                'aseguradora': localStorage.getItem("CRAWFORD_aseguradora"),
-
-                'ciudadrecidencia': '',
-                'telefonofijo': '',
-                'celular': '',
-                'direccion': '',
-                'telefonolaboral': ''
-            };
-
-            //traer todos las ciudades
-            $http({
-                url: host + '/ciudades/all',
-                method: "GET"
-            }).then(function (result) {
-                console.log(result);
-                $scope.ciudades = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
-
-            $scope.go_pass2 = function () {
-                if (this.validate() !== false) {
-                    $state.go('nuevoReclamo23', $scope.form);
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    $state.go('loginall');
+                } else {
+                    $state.go("menu.estudiante_panel");
                 }
+                
+            };
+            $scope.go_fqs = function(){
+                alert('preguntas frecuentes');
+                $state.go();
+            };
+            $scope.go_misnotificaciones = function(){
+                alert('notificaciones');
+                $state.go();
+            };
+            $scope.go_miperfil = function(){
+                alert('mi perfil');
+                $state.go();
             };
 
-            $scope.validate = function () {
-                if ($scope.form.password === '' ||
-                    $scope.form.cedula === '' ||
-                    $scope.form.nombreasegurado === '' ||
-                    $scope.form.apellidoasegurado === '' ||
-                    $scope.form.fechanacimientoasse === '' ||
-                    $scope.form.email === '' ||
-                    $scope.form.marca === '' ||
-                    $scope.form.tipo_seguro === '' ||
-                    $scope.form.aseguradora === '' ||
-                    $scope.form.ciudadrecidencia === '' ||
-                    $scope.form.telefonofijo === '' ||
-                    $scope.form.celular === '' ||
-                    $scope.form.direccion === '' ||
-                    $scope.form.telefonolaboral === '') {
 
-                    alert('Verifica los datos');
-                    return false;
-                }
-            };
 
-            $scope.cancelar = function () {
-                $state.go('menu.misReclamos');
+
+            $scope.go_tareaid = function(){
+                alert('Tarea ID');
+                $state.go('menu.tareaid');
             };
 
         }])
 
-    .controller('nuevoReclamo23Ctrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state, $ionicPlatform) {
 
-            $scope.form1 = $stateParams;
-
-            $scope.form = {
-                'campana': "",
-                'tienda': "",
-                'tipo_asegurado': "",
-                'tipo_poliza': "",
-                'producto': "1",
-                'jsonrespuestaform': ""
-            };
-
-            //traer todos las campanas
-            $http({
-                url: host + '/campanas/search/' + localStorage.getItem("CRAWFORD_aseguradora"),
-                method: "GET"
-            }).then(function (result) {
-                console.log(result);
-                $scope.campanas = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
-
-            $scope.onChange_campana = function (campana) {
-                //traer todos las tiendas
-                $http({
-                    url: host + '/tiendas/search/' + campana,
-                    method: "GET"
-                }).then(function (result) {
-                    console.log(result);
-                    $scope.tiendas = result.data.body;
-                }, function (err) {
-                    console.log(err);
-                });
-            };
-
-            $scope.onChange_tienda = function (tienda) {
-                //traer todos las tipo_asegurados
-                $http({
-                    url: host + '/tipo_asegurados/search/' + tienda,
-                    method: "GET"
-                }).then(function (result) {
-                    console.log(result);
-                    $scope.asegurados = result.data.body;
-                }, function (err) {
-                    console.log(err);
-                });
-            };
-
-            $scope.onChange_tipo_asegurado = function (tipo_asegurado) {
-                //traer todos las tipo_poliza
-                $http({
-                    url: host + '/tipo_polizas/search/' + tipo_asegurado,
-                    method: "GET"
-                }).then(function (result) {
-                    console.log(result);
-                    $scope.tipo_polizas = result.data.body;
-                }, function (err) {
-                    console.log(err);
-                });
-            };
-
-            $scope.onChange_tipo_poliza = function (tipo_polizas) {
-                //traer todos las tipo_poliza
-                $http({
-                    url: host + '/tipo_polizas/get/' + tipo_polizas,
-                    method: "GET"
-                }).then(function (result) {
-                    //creaate formulario in tipo_polizas
-                    console.log(result);
-                    $scope.formularios = JSON.parse(result.data.body[0].formulario).pasos;
-                    console.log($scope.formularios);
-                }, function (err) {
-                    console.log(err);
-                });
-            };
-
-            $scope.go_pass3 = function () {
-                try{
-                    //consumir respuestas en json formuario backend
-                    $scope.form.jsonrespuestaform = '{ "pasos": [';
-                    $scope.formularios.forEach(function (element) {
-                        $scope.form.jsonrespuestaform += '{ "name" : "' + element.id + '", "value" : "' + document.getElementById(element.id).value + '" }';
-                        ;
-                        //$scope.form.jsonrespuestaform += element.name;
-                    }, this);
-                    $scope.form.jsonrespuestaform += " ]}";
-                }
-                catch(e){
-                    console.log('un intento fallido');
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    $state.go('loginall');
+                } else {
+                    $state.go("menu.estudiante_panel");
                 }
                 
-                //recopilacion datos
-                $scope.data_form = {
-                    'reclamoid': "NEWRECLAMO",
-                    'cedula': $scope.form1.cedula,
-                    'nombreasegurado': $scope.form1.nombreasegurado,
-                    'apellidoasegurado': $scope.form1.apellidoasegurado,
-                    'fechanacimientoasse': $scope.form1.fechanacimientoasse,
-                    'ciudadrecidencia': $scope.form1.ciudadrecidencia,
-                    'telefonofijo': $scope.form1.telefonofijo,
-                    'celular': $scope.form1.celular,
-                    'direccion': $scope.form1.direccion,
-                    'email': $scope.form1.email,
-                    'telefonolaboral': $scope.form1.telefonolaboral,
-                    'producto': $scope.form.producto,
-                    'jsonrespuestaform': $scope.form.jsonrespuestaform,
-                    'tipo_poliza': $scope.form.tipo_poliza
-                };
-                console.log($scope.data_form);
-                if (this.validate() !== false) {
-                    $state.go('nuevoReclamo33', $scope.data_form);
-                }                   
+            };
+            $scope.go_fqs = function(){
+                alert('preguntas frecuentes');
+                $state.go();
+            };
+            $scope.go_misnotificaciones = function(){
+                alert('notificaciones');
+                $state.go();
+            };
+            $scope.go_miperfil = function(){
+                alert('mi perfil');
+                $state.go();
             };
 
-            $scope.validate = function () {
-                if ($scope.form.producto === '' ||
-                    $scope.form.jsonrespuestaform === '' ||
-                    $scope.form.tipo_poliza === '' ) {
 
-                    alert('Verifica los datos');
-                    return false;
-                }
+
+            $scope.go_descubre = function(){
+                alert('descubre');
+                $state.go('menu.descubre');
             };
-
-            $scope.cancelar = function () {
-                $state.go('menu.misReclamos');
-            };
-
-            $ionicPlatform.registerBackButtonAction(function () {
-                alert('no puedes ir atras');
-            }, 100);
+            
 
         }])
 
-    .controller('nuevoReclamo33Ctrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('descubreCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state, $ionicLoading) {
 
-            $scope.form1 = $stateParams;
-
-            $scope.data_form = {
-                'reclamoid': $scope.form1.reclamoid,
-                'cedula': $scope.form1.cedula,
-                'nombreasegurado': $scope.form1.nombreasegurado,
-                'apellidoasegurado': $scope.form1.apellidoasegurado,
-                'fechanacimientoasse': $scope.form1.fechanacimientoasse,
-                'ciudadrecidencia': $scope.form1.ciudadrecidencia,
-                'telefonofijo': $scope.form1.telefonofijo,
-                'celular': $scope.form1.celular,
-                'direccion': $scope.form1.direccion,
-                'email': $scope.form1.email,
-                'telefonolaboral': $scope.form1.telefonolaboral,
-                'producto': $scope.form1.producto,
-                'jsonrespuestaform': $scope.form1.jsonrespuestaform,
-                'fechasiniestro': "",
-                'horasiniestro': "",
-                'descripcionsiniestro': "",
-                'textobackend': "SIN TEXTO",
-                'observaciones': "SIN OBSERVACIONES",
-                'motivobaja': "NO BAJA",
-                'cliente': localStorage.getItem("CRAWFORD_cliente"),
-                'estados_poliza': "3",
-                'ciudadsiniestro': ""
-            };
-
-            //traer todos las ciudades
-            $http({
-                url: host + '/ciudades/all',
-                method: "GET"
-            }).then(function (result) {
-                console.log(result);
-                $scope.ciudades = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
-
-            //enviar datos post a laravel create reclamo
-            $scope.generar_caso = function () {
-                // Setup the loader
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });
-                console.log($scope.data_form);
-                if (this.validate() !== false) {
-                    $http({
-                        url: host + '/reclamos/create',
-                        method: "POST",
-                        contentType: "text/xml",
-                        dataType: "text",
-                        data: $scope.data_form
-                    }).then(function (result) {
-                        console.log(result);
-                        if (result.data.Status == 'false') {
-                            alert(result.data.Message);
-                            $ionicLoading.hide();
-                        }
-                        else {
-                            alert("Caso generado # " + result.data.body.reclamoid);
-                            $ionicLoading.hide();
-                            $state.go('menu.misReclamos', {
-                                'CRAWFORD_cliente': localStorage.getItem('CRAWFORD_cliente')
-                            });/*
-                            $state.go('checklist', {
-                                "id_reclamo": result.data.body.id,
-                                "tipo_poliza": $scope.form1.tipo_poliza
-                            });*/
-                        }
-                    }, function (err) {
-                        console.log(err);
-                        $ionicLoading.hide();
-                    });  
-                } 
-            };
-
-            $scope.validate = function () {
-                if ($scope.data_form.fechasiniestro === '' ||
-                    $scope.data_form.horasiniestro === '' ||
-                    $scope.data_form.descripcionsiniestro === '' ||
-                    $scope.data_form.ciudadsiniestro === '' ) {
-
-                    alert('Verifica los datos');
-                    $ionicLoading.hide();
-                    return false;
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    $state.go('loginall');
+                } else {
+                    $state.go("menu.estudiante_panel");
                 }
+                
+            };
+            $scope.go_fqs = function(){
+                alert('preguntas frecuentes');
+                $state.go();
+            };
+            $scope.go_misnotificaciones = function(){
+                alert('notificaciones');
+                $state.go();
+            };
+            $scope.go_miperfil = function(){
+                alert('mi perfil');
+                $state.go();
             };
 
-            $scope.cancelar = function () {
-                $state.go('menu.misReclamos');
+
+
+            $scope.go_chat = function(){
+                alert('Chat');
+                $state.go('menu.chat');
             };
+
+            
         }
 
     ])
 
-    .controller('checklistCtrl', ['$scope', '$stateParams', '$cordovaDialogs', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistokensCtrl', ['$scope', '$stateParams', '$cordovaDialogs', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $cordovaDialogs, $http, $state, $ionicLoading) {
 
-            $scope.caso = $stateParams;
-            $scope.contador = {
-                'list' : 0,
-                'doc' : 0
-            };
-
-            //intervalos de 3 segundos y refresca los Datos
-            this.task = setInterval(() => {
-                $scope.refreshData();
-              }, 2000);
-
-            $scope.refreshData = function(){
-                console.log('este es un dato');
-                //traer los checklist
-                    $http({
-                        url: host + '/listchekings/search/' + $scope.caso.tipo_poliza,
-                        method: "GET"
-                    }).then(function (result) {
-                        console.log(result);
-                        $scope.listas = result.data.body;
-                    }, function (err) {
-                        console.log(err);
-                    });
-
-                    //buscar toda la informacion de los documentos y la cantidad
-                    $http({
-                        url: host + '/documentsmodel/verificarcompletos',
-                        method: "POST",
-                        contentType: "text/xml",
-                        dataType: "text",
-                        data: {
-                            'reclamo' : $scope.caso.id_reclamo
-                        }
-                    }).then(function (result) {
-                        console.log('resultado....');
-                        console.log(result.data);
-                        $scope.documents = result.data.body;
-                    }, function (err) {
-                        console.log(err);
-                    });
-            };
-
-            console.log($scope.caso);
-
-            //traer los checklist
-            $http({
-                url: host + '/listchekings/search/' + $scope.caso.tipo_poliza,
-                method: "GET"
-            }).then(function (result) {
-                console.log(result);
-                $scope.listas = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
-
-            //buscar toda la informacion de los documentos y la cantidad
-            $http({
-                url: host + '/documentsmodel/verificarcompletos',
-                method: "POST",
-                contentType: "text/xml",
-                dataType: "text",
-                data: {
-                    'reclamo' : $scope.caso.id_reclamo
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    $state.go('loginall');
+                } else {
+                    $state.go("menu.estudiante_panel");
                 }
-            }).then(function (result) {
-                console.log('resultado....');
-                console.log(result.data);
-                $scope.documents = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
+                
+            };
+            $scope.go_fqs = function(){
+                alert('preguntas frecuentes');
+                $state.go();
+            };
+            $scope.go_misnotificaciones = function(){
+                alert('notificaciones');
+                $state.go();
+            };
+            $scope.go_miperfil = function(){
+                alert('mi perfil');
+                $state.go();
+            };
 
-            $scope.aviso = function (id_reclamo, tipo_poliza, ayuda) {
-                alert(ayuda);
-                ///$state.go('menu.caso1402', {
-                ///    'id_reclamo': id_reclamo,
-                ///    'tipo_poliza': tipo_poliza,
-                ///    'ayuda': ayuda
-               /// });
+
+
+            $scope.go_payu = function(){
+                $state.go('payu');
             }
-
-            $scope.reclamar = function(){
-                // Setup the loader
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });
-                $http({
-                    url: host + '/reclamos/updateToEnEstudio',
-                    method: "POST",
-                    contentType: "text/xml",
-                    dataType: "text",
-                    data: {
-                        'reclamo' : $scope.caso.id_reclamo
-                    }
-                }).then(function (result) {
-                    console.log('resultado....');
-                    console.log(result.data);
-                    $scope.documents = result.data.body;
-                    $ionicLoading.hide();
-                    $state.go('menu.misReclamos', {
-                        CRAWFORD_cliente: localStorage.getItem('CRAWFORD_cliente')
-                    });
-                }, function (err) {
-                    console.log(err);
-                    $ionicLoading.hide();
-                });
-            };
-
-            $scope.go_scanner = function (id_reclamo, id_checklist, tipo_poliza, ayuda) {
-                alert(ayuda);
-                $state.go('escanear', {
-                    'id_reclamo': id_reclamo,
-                    'id_checklist': id_checklist,
-                    'tipo_poliza': tipo_poliza
-                });
-            };
-
-            $scope.go_record = function (id_reclamo, id_checklist, tipo_poliza, ayuda) {
-                alert(ayuda);
-                $state.go('grabarAudio', {
-                    'id_reclamo': id_reclamo,
-                    'id_checklist': id_checklist,
-                    'tipo_poliza': tipo_poliza
-                });
-            };
 
         }
 
@@ -945,10 +659,20 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('grabarAudioCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('subirtareaCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
+
+            $scope.guardar = function(){
+                $state.go();
+            };
+
+            $scope.escanner = function(){
+                $state.go('escanear');
+            };
+
+            /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
 
         }])
 

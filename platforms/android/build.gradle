@@ -92,7 +92,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "onesignal-cordova-plugin/starter-build-extras-onesignal.gradle"
+apply from: "onesignal-cordova-plugin/phomework-build-extras-onesignal.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()

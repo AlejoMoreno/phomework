@@ -1,31 +1,33 @@
-<ion-view title="Mis Reclamos" cache-view="true" id="page">
-  <ion-content padding="true" class="manual-remove-top-padding has-header">
-      <p>
-          <iframe width="100%" height="230" src="https://www.youtube.com/embed/-IRBaGeclxk" frameborder="0" allowfullscreen=""></iframe>
-        </p>
-    <a ui-sref="menu.nuevoReclamo13()" id="misReclamos-button13" class="button button-positive button-block icon ion-android-add-circle">&nbsp;&nbsp;&nbsp;Nuevo caso de reclamación&nbsp;</a>
-    <div id="misReclamos-markdown15" style="text-align:center;" class="show-list-numbers-and-dots">
-      <p style="color:#AAAAAA;">Tus Casos de
-        <strong>Reclamación</strong>
-      </p>
-    </div>
-    <ion-list id="misReclamos-list7" class="manual-list-fullwidth" ng-repeat="caso in casos track by $index">
-      <div ng-if=" caso.estados_poliza.id == 3">
-          <ion-item class="item-icon-right" id="misReclamos-list-item29" ng-click="go_block({{ caso.id }}, {{ caso.producto.tipo_poliza }})">Caso #{{ caso.reclamoid |number }}<small style="font-size:8px;"><br>{{ caso.updated_at }}</small>
-            <span class="item-note">
-              <small>{{ caso.estados_poliza.descripcion }}</small>
-            </span>
-            <i class="icon ion-ios-arrow-forward"></i>
-          </ion-item>
-      </div>    
-      <div ng-if=" caso.estados_poliza.id != 3">
-          <ion-item class="item-icon-right" id="misReclamos-list-item29" ng-click="go_checklist({{ caso.id }}, {{ caso.producto.tipo_poliza }})">Caso #{{ caso.reclamoid |number }}<small style="font-size:8px;"><br>{{ caso.updated_at }}</small>
-            <span class="item-note">
-              <small>{{ caso.estados_poliza.descripcion }}</small>
-            </span>
-            <i class="icon ion-ios-arrow-forward"></i>
-          </ion-item>
-      </div>  
-    </ion-list>
+<ion-view title="Estudiante panel" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+  <ion-content padding="true" id="body1">
+
+
+    
+
+
+<style>
+#body1{
+  background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
+  filter: blur(0px);
+}
+#body1:before {
+  content: "";
+  position: absolute;
+  background: url(http://phomework.com.co/www/image/fondo5.jpg);
+  background-size: cover;
+  z-index: -1; /* Keep the background behind the content */
+  height: 19%; width: 25%; /* Using Glen Maddern's trick /via @mente */
+
+  /* don't forget to use the prefixes you need */
+  transform: scale(5);
+  transform-origin: top left;
+  filter: blur(2px);
+}
+.item-input{
+  background: white;
+  opacity: 0.7;
+}
+</style>
+
   </ion-content>
 </ion-view>
