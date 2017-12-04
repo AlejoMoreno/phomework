@@ -1,0 +1,28 @@
+<ion-view title="Mi Perfil" id="page10">
+  <ion-content padding="true" class="has-header">
+    <div id="miPerfil-container4" class="avatar">
+        <center><div class="round" style="background:#474747; width:100px; height:100px;border-radius:50%;color:white;"  >
+            <p style="padding-top:40px;font-size:30px;">
+                {{ perfil.nombre[0] | uppercase }}{{ perfil.lastname[0] | uppercase }}
+            </p>
+          </div></center>
+    </div>
+    <div class="list card" id="miPerfil-card21">
+      <ion-item class="item-icon-left positive" id="miPerfil-list-item13">
+        <i class="icon ion-ios-contact-outline"></i>Mario Castro</ion-item>
+      <ion-item class="item-icon-right stable" id="miPerfil-list-item18">Cédula
+        <input class="item-note" type="text" ng-model="perfil.cedula" >
+        <i class="icon ion-edit icon-accessory"></i>
+      </ion-item>
+      <ion-item class="item-icon-right stable" id="miPerfil-list-item17">Email
+          <input class="item-note" type="text" ng-model="perfil.email" >
+        <i class="icon ion-edit icon-accessory"></i>
+      </ion-item>
+      <ion-item class="item-icon-right stable" id="miPerfil-list-item16">Clave
+          <input class="item-note" type="password" ng-model="perfil.password" value="8888">
+        <i class="icon ion-edit icon-accessory"></i>
+      </ion-item>
+    </div>
+    <button id="miPerfil-button5" style="font-weight:600;" ng-click="update_register()" class="button button-dark button-block icon-left ion-checkmark-circled">ACTUALIZAR</button>
+  </ion-content>
+</ion-view>

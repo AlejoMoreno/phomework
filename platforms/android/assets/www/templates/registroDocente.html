@@ -1,0 +1,128 @@
+<ion-view title="Registro" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+    <ion-content padding="true" id="body1">
+
+
+      <form id="registerEstu">
+
+        <input id="registerEstunickname" type="hidden" ng-model="form.nickname">
+
+        <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+        <label style="color:black">Todos los campos son obligatorios</label>
+        <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Nombre</h3>
+          </span>
+          <input type="text" placeholder="ej.(alejandro)" ng-model="form.nombre">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Apellido</h3>
+          </span>
+          <input type="text" placeholder="ej.(moreno)" ng-model="form.apellido">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Correo</h3>
+          </span>
+          <input type="text" placeholder="ej.(admin@admin.com)" ng-model="form.correo">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Teléfono</h3>
+          </span>
+          <input type="text" placeholder="ej.(3219045297)" ng-model="form.telefono">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Dirección</h3>
+          </span>
+          <input type="text" placeholder="ej.(Cl 38 78 9)" ng-model="form.direccion">
+        </label>
+
+
+        
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Clave</h3>
+          </span>
+          <input type="text" placeholder="***" ng-model="form.clave">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Repita Clave</h3>
+          </span>
+          <input type="text" placeholder="***" ng-model="form.clave2">
+        </label>
+        
+        <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+        <label style="color:black">Datos bancarios (con el fin de consignarles)</label>
+        <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3># Cta.</h3>
+          </span>
+          <input type="text" placeholder="cuenta bancaria" ng-model="form.cuentabancaria">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Tipo Cta.</h3>
+          </span>
+          <input type="text" placeholder="Tipo cuenta bancaria" ng-model="form.tipocuentabancaria">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Banco</h3>
+          </span>
+          <input type="text" placeholder="Nombre banco" ng-model="form.nombrebanco">
+        </label>
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Descripción</h3>
+          </span>
+          <textarea style="height: 100px;" type="text" placeholder="Escriba porque phomework debe habilitarlo como docente" ng-model="form.descripcion"></textarea>
+        </label>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+        <ion-item ng-click="save()" style="background:transparent;border:1px solid #53ad1b;width: 100%;">
+          <div class="panel-body" style="text-align: center;"><h2 style="color:#53ad1b">Registrar en Phomework</h2></div>
+        </ion-item>
+
+          <ion-item ng-click="gologin" style="background:transparent;border: 0px solid #207ce5;">
+              <div id="contact" class="jumbotro text-center">
+                  <h6 style="color: #207ce5;">¿Ya tienes cuenta?</h6>
+              </div>
+          </ion-item>
+
+      </form>
+
+      <ion-list  style="width: 110%;position:relative;bottom: 0px;">
+        <ion-item style="background: #207ce5;border:0px;">
+            <div id="contact" class="jumbotro text-center">
+                <h6 style="color:white;">Copyright wakusoft@2017</h6>
+            </div>
+        </ion-item>
+      </ion-list>
+
+<style>
+  #body1{
+    background-image: url('http://phomework.com.co/www/image/fondo5.jpg')
+  }
+  .item-input{
+    background: white;
+    opacity: 0.7;
+  }
+</style>
+
+    </ion-content>
+  </ion-view>

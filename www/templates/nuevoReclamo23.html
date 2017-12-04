@@ -1,0 +1,56 @@
+<ion-view title="Nuevo Reclamo 2/3" hide-nav-bar="true" cache-view="false" id="page16" style="background-color:#E4E4E4;">
+  <ion-content padding="true" class="manual-ios-statusbar-padding">
+    <form id="nuevoReclamo23-form6" class="list">
+      <div id="nuevoReclamo23-markdown24" style="text-align:center;" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#999999;">Antecedentes del
+          <strong>PRODUCTO</strong>
+        </p>
+      </div>
+      <label class="item item-select" id="nuevoReclamo23-select6">
+        <span class="input-label">
+          <h4>Campaña</h4>
+        </span>
+        <select ng-model="form.campana" ng-change="onChange_campana(form.campana)" id="campana" ng-options="id.id as id.nombre for id in campanas"></select>
+      </label>
+      <label class="item item-select" id="nuevoReclamo23-select8">
+        <span class="input-label">
+          <h4>Tienda</h4>
+        </span>
+        <select ng-model="form.tienda" ng-change="onChange_tienda(form.tienda)" id="tienda" ng-options="id.id as id.nombre for id in tiendas"></select>
+      </label>
+      <label class="item item-select" id="nuevoReclamo23-select7">
+        <span class="input-label">
+          <h4>Asegurado</h4>
+        </span>
+        <select ng-model="form.tipo_asegurado" ng-change="onChange_tipo_asegurado(form.tipo_asegurado)" id="asegurados" ng-options="id.id as id.nombre for id in asegurados"></select>
+      </label>
+      <label class="item item-select" id="nuevoReclamo23-select13">
+        <span class="input-label">
+          <h4>Poliza</h4>
+        </span>
+        <select ng-model="form.tipo_poliza" ng-change="onChange_tipo_poliza(form.tipo_poliza)" id="tipo_polizas" ng-options="id.id as id.nombre for id in tipo_polizas"></select>
+      </label>
+      <label class="item item-select" id="nuevoReclamo23-select14">
+        <span class="input-label">
+          <h4>Producto</h4>
+        </span>
+        <select ng-model="form.producto"> <option value="1">POLIZA GENERICA</option> </select>
+      </label>
+      <input type="hidden" ng-model="form.jsonrespuestaform" >
+      <div class="spacer" style="width: 300px; height: 11px;"></div>
+      <div id="nuevoReclamo13-markdown23" style="text-align:center;" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#999999;">Other Question </p>
+      </div>
+      <div ng-repeat="formulario in formularios track by $index">
+        <label class="item item-input" id="nuevoReclamo13-input30">
+          <span class="input-label">
+            <h3>{{ formulario.label }}</h3>
+          </span>
+          <input type="text" placeholder="{{ formulario.placeholder }}" id="{{ formulario.id }}" ng-model="form_other.dsadsa">
+        </label>
+      </div>
+      <button id="nuevoReclamo23-button16" ng-click="go_pass3()" class="button button-dark button-block icon-right ion-chevron-right">SIGUIENTE PASO</button>
+      <button id="nuevoReclamo23-button26" ng-click="cancelar()" class="button button-assertive button-block icon-left ion-android-cancel">CANCELAR</button>
+    </form>
+  </ion-content>
+</ion-view>

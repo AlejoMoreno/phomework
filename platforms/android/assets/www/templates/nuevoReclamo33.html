@@ -1,0 +1,38 @@
+<ion-view title="Nuevo Reclamo 3/3" hide-nav-bar="true" cache-view="false" id="page17" style="background-color:#E4E4E4;">
+  <ion-content padding="true" class="manual-ios-statusbar-padding">
+    <form id="nuevoReclamo33-form7" class="list">
+      <div id="nuevoReclamo33-markdown26" style="text-align:center;" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#999999;">Antecedentes del
+          <strong>SINIESTRO</strong>
+        </p>
+      </div>
+      <label class="item item-input" id="nuevoReclamo33-input43">
+        <span class="input-label">
+          <h4>Fecha del Siniestro</h4>
+        </span>
+        <input type="date" ng-model="data_form.fechasiniestro" placeholder="dd/mm/aa">
+      </label>
+      <label class="item item-input" id="nuevoReclamo33-input44">
+        <span class="input-label">
+          <h4>Hora del
+            <br>Siniestro</h4>
+        </span>
+        <input type="time" ng-model="data_form.horasiniestro" placeholder="00:00pm">
+      </label>
+      <label class="item item-select" id="nuevoReclamo33-select11">
+        <span class="input-label">
+          <h4>Ciudad del
+            <br>Siniestro</h4>
+        </span>
+        <select ng-model="data_form.ciudadsiniestro" ng-options="id.id as id.nombre for id in ciudades"></select>
+      </label>
+      <label class="item item-input" id="nuevoReclamo33-textarea2">
+        <span class="input-label">
+          <h4>Descripción del
+            <br>Siniestro</h4>
+        </span><textarea placeholder="" ng-model="data_form.descripcionsiniestro"></textarea></label>
+      <a id="nuevoReclamo33-button17" ng-click="generar_caso()" class="button button-dark button-block icon-left ion-android-alert">GENERAR AVISO</a>
+      <a id="nuevoReclamo33-button27" ng-click="cancelar()" class="button button-assertive button-block icon-left ion-android-cancel" ng-click="cancelar()">CANCELAR</a>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<ion-view title="Chat" id="page22">
+  <ion-content padding="false" scroll="false" class="has-header" >
+    <ion-scroll id="chat-container1" class="top-container" >
+        <ion-list id="chat-list12" scroll-glue="glued" ng-repeat="historial in historiales track by $index">
+
+          <div ng-if="historial.sender == message.sender ">
+              <ion-item class="item-avatar" id="chat-list-item25" style="float: right;width: 100%;">
+                  <p>{{ historial.message }}</p>
+                  <small style="font-size:9px;">{{ historial.state }} {{ historial.created_at }} </small>
+                </ion-item>
+          </div>
+
+          <div ng-if="historial.sender != message.sender ">
+              <ion-item class="item-avatar" id="chat-list-item25" style="float: left;width: 100%;opacity: 0.8;">
+                  
+                  <p>{{ historial.message }}</p>
+                  <small style="font-size:9px;">{{ historial.state }} {{ historial.created_at }} </small>
+                </ion-item>
+          </div>
+
+        </ion-list>
+    </ion-scroll>
+    <form id="chat-form10" class="list bottom-form"  ng-submit="addMessage()">
+      <label class="item item-input" id="chat-input20">
+        <span class="input-label">Mensaje</span>
+        <input type="text" placeholder="" ng-model="message.message">
+      </label>
+      <button id="chat-button30" style="border-radius:0px 0px 0px 0px;" class="button button-positive button-block" ng-click="addmessage()">ENVIAR</button>
+    </form>
+  </ion-content>
+</ion-view>
+

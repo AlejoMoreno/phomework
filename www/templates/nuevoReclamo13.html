@@ -1,0 +1,81 @@
+<ion-view title="Nuevo Reclamo 1/3" hide-nav-bar="true" cache-view="false" id="page15" style="background-color:#E4E4E4;">
+  <ion-content padding="true" class="manual-ios-statusbar-padding">
+    <form id="nuevoReclamo13-form5" class="list">
+      <div id="nuevoReclamo13-markdown22" style="text-align:center;" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#999999;"> Identificación
+          <strong>CLIENTE</strong>
+        </p>
+      </div>
+      <ion-list id="nuevoReclamo13-list9">
+        <label class="item item-input" id="nuevoReclamo13-input27">
+          <span class="input-label">
+            <h3>Nombres Asegurado</h3>
+          </span>
+          <input type="text" placeholder="" ng-model="form.nombreasegurado" value="{{ form.nombreasegurado }}">
+        </label>
+        <label class="item item-input" id="nuevoReclamo13-input28">
+          <span class="input-label">
+            <h3>Apellidos Asegurado</h3>
+          </span>
+          <input type="text" placeholder="" ng-model="form.apellidoasegurado"  value="{{ form.apellidoasegurado }}">
+        </label>
+        <label class="item item-input" id="nuevoReclamo13-input31">
+          <span class="input-label">
+            <h3>Cédula</h3>
+          </span>
+          <input type="number" placeholder="" ng-model="form.cedula"  value="{{ form.cedula }}">
+        </label>
+        <label class="item item-input" id="nuevoReclamo13-input29">
+          <span class="input-label">
+            <h3>Fecha de Nacimiento</h3>
+          </span>
+          <input type="date" placeholder="" ng-model="form.fechanacimientoasse"  value="{{ form.fechanacimientoasse }}">
+        </label>
+        <label class="item item-input" id="nuevoReclamo13-input34">
+          <span class="input-label">
+            <h3>Email</h3>
+          </span>
+          <input type="email" placeholder="" ng-model="form.email"   value="{{ form.email }}">
+        </label>
+      </ion-list>
+      <div class="spacer" style="width: 300px; height: 11px;"></div>
+      <div id="nuevoReclamo13-markdown23" style="text-align:center;" class="show-list-numbers-and-dots">
+        <p style="margin-top:0px;color:#999999;">Ubicación </p>
+      </div>
+      <label class="item item-select" id="nuevoReclamo13-select5">
+        <span class="input-label">
+          <h4>Ciudad de Residencia</h4>
+        </span>
+        <select ng-model="form.ciudadrecidencia" ng-options="id.id as id.nombre for id in ciudades" >
+          <option value="">ciudad</option>
+        </select>
+      </label>
+      <label class="item item-input" id="nuevoReclamo13-input30">
+        <span class="input-label">
+          <h3>Teléfono Fijo</h3>
+        </span>
+        <input type="tel" placeholder="" ng-model="form.telefonofijo"   value="{{ form.telefonofijo }}">
+      </label>
+      <label class="item item-input" id="nuevoReclamo13-input31">
+        <span class="input-label">
+          <h3>Teléfono Celular</h3>
+        </span>
+        <input type="tel" placeholder="" ng-model="form.celular"   value="{{ form.celular }}">
+      </label>
+      <label class="item item-input" id="nuevoReclamo13-input32">
+        <span class="input-label">
+          <h3>Dirección Laboral</h3>
+        </span>
+        <input type="text" placeholder="" ng-model="form.direccion"   value="{{ form.direccion }}">
+      </label>
+      <label class="item item-input" id="nuevoReclamo13-input33">
+        <span class="input-label">
+          <h3>Teléfono Laboral </h3>
+        </span>
+        <input type="tel" placeholder="" ng-model="form.telefonolaboral"   value="{{ form.telefonolaboral }}">
+      </label>
+      <button id="nuevoReclamo13-button15" ng-click="go_pass2()" class="button button-dark button-block icon-right ion-chevron-right">SIGUIENTE PASO</button>
+      <button id="nuevoReclamo13-button24" ng-click="cancelar()" class="button button-assertive button-block icon-left ion-android-cancel">CANCELAR</button>
+    </form>
+  </ion-content>
+</ion-view>

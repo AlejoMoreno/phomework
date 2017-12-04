@@ -1,0 +1,116 @@
+<ion-view title="Info docente" hide-back-button="true" cache-view="false" nav-transition="none">
+        
+        <style type="text/css">
+          #body {
+                animation: colorchange 50s; /* animation-name followed by duration in seconds*/
+                   /* you could also use milliseconds (ms) or something like 2.5s */
+                -webkit-animation: colorchange 50s; /* Chrome and Safari */
+                -webkit-animation-iteration-count: 10;
+              }
+          
+          
+              @keyframes colorchange
+              {
+                0%   {background: white;}
+                25%  {background: #207ce5;}
+                50%  {background: #f02f17;}
+                75%  {background: #207ce5;}
+                100% {background: white;}
+              }
+          
+              @-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+              {
+                0%   {background: white;}
+                25%  {background: #207ce5;}
+                50%  {background: #f02f17;}
+                75%  {background: #207ce5;}
+                100% {background: white;}
+              }
+          
+          
+          .container{
+              width: 350px;
+              padding-bottom: 250px;
+          }
+          a{color: white}
+          a:hover{text-decoration: none;color: black}
+          
+          .input-group-addon{background: transparent;color: white;}
+          .estudiante:hover{
+              background: #207ce5;
+              color: white;
+          }
+          .estudiante{
+              background: white;
+              color: #207ce5;
+          }
+          .item img{
+            margin-left: 2%;
+            float: left;
+            width: 100px;
+          }
+          div{
+            background: transparent;
+            color:white;
+          }
+          h2{
+            color: white;
+          }
+          </style>
+          
+      
+        <ion-content id="body" padding="true" class="has-header">
+          
+          <ion-list style="width: 110%;position:absolute;left: -15px;">
+            <ion-item style="background: transparent;border:0px;width: 100%;">
+            </ion-item>
+            <ion-item ng-click="go_info_estudiante()" style="background: transparent;border:0px;width: 100%;">
+                <!-- imgenes de muestra informativa -->
+                <!--galeria de imagenes informativas Boostrap-->
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                  </ol>
+      
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                    <div ng-repeat="item in items track by $index">
+      
+                        <div class="item active" ng-if="item.show == 'true' " ng-click="pass( item.id );" style="background: white;">
+                          <img style="width: 70px;padding: 5px;padding-right: 20px;" src="{{ item.img }}" alt="Chania">
+                          <h3 style="color:#207ce5">{{ item.titulo }}<br><small style="color:white;">{{ item.texto }}</small></h3><br>
+                        </div>
+      
+                        <div ng-if="item.show == 'false' "></div>
+      
+                    </div>
+                </div>
+      
+      
+            </ion-item>
+            <ion-item style="background: transparent;border:0px;width: 100%;">
+              </ion-item>
+            <ion-item ng-click="goregistro()" style="background: #ffffff;border:0px;width: 100%;opacity: 0.8;">
+                <div class="panel-body "  style="text-align: center"><h2 style="color:#207ce5;">Regístrate</h2></div>
+            </ion-item>
+      
+            <ion-item ng-click="gologin()" style="background: #f0380a;border: 0px;width: 100%;">
+                <div class="panel-body " style="text-align: center"><h2 style="color:white;">¿Ya tienes Cuenta?</h2></div>
+            </ion-item>
+        </ion-list>
+      
+        <ion-list  style="width: 110%;position:fixed;left: -15px;bottom: 0px;">
+            <ion-item style="background: #207ce5;border:0px;">
+                <div id="contact" class="jumbotro text-center">
+                    <h6 style="color:white;">Copyright wakusoft@2017</h6>
+                </div>
+            </ion-item>
+        </ion-list>
+      
+        </ion-content>
+      </ion-view>
