@@ -80,10 +80,43 @@ angular.module('app.routes', [])
 
             .state('menu.tareaid', {
                 url: '/tareaid',
+                params: {
+                    tareaid: "",
+                },
                 views: {
                     'side-menu21': {
                         templateUrl: 'templates/tareaid.html',
                         controller: 'tareaidCtrl'
+                    }
+                }                
+            })
+
+            .state('menu.miperfilestudiante', {
+                url: '/miperfilestudiante',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/miperfilestudiante.html',
+                        controller: 'miperfilestudianteCtrl'
+                    }
+                }                
+            })
+
+            .state('menu.miperfildocente', {
+                url: '/miperfildocente',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/miperfildocente.html',
+                        controller: 'miperfildocenteCtrl'
+                    }
+                }                
+            })
+
+            .state('menu.notificaciones', {
+                url: '/notificaciones',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/notificaciones.html',
+                        controller: 'notificacionesCtrl'
                     }
                 }                
             })

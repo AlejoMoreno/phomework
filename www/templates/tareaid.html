@@ -14,36 +14,36 @@
           }
         </style>
 
-        <ion-item style="background: transparent;border: 1px solid #0c60ee;">
-          <center><img width="40" src="http://phomework.com.co/www/image/soluciones.png"> 
-          texto</center>
+        <ion-item style="background: transparent;border: 1px solid #0c60ee;" ng-click="go_to({{ tarea[2].url }})">
+          <center><img width="40" src="{{ tarea[2].img }}"> 
+          {{ tarea[2].texto }}</center>
         </ion-item>
 
 
-        <h4 style="text-align: center" >TITULO TAREA<small><br>Id:22</small></h4>
-        <p><strong>Estado:</strong><label>estado</label></p>
-        <p><strong>Descripción:</strong><label>desdddd</label></p>
-        <p><strong>Creación:</strong><label>2017-123-2</label></p>
-        <p><strong>Vencimiento:</strong><label>2017-60-0</label></p>
-        <p>Tarea con un valor de <strong>0</strong> Tokens</p>
+        <h4 style="text-align: center" >{{ tarea[0].tarea.nombre }}<small><br>Id:{{ tarea[0].tarea.idtareas }}</small></h4>
+        <p><strong>Estado:</strong><label> {{ tarea[0].tarea.estado }}</label></p>
+        <p><strong>Descripción:</strong><label> {{ tarea[0].tarea.descripcion }}</label></p>
+        <p><strong>Creación:</strong><label> {{ tarea[0].tarea.fecha_creacion }}</label></p>
+        <p><strong>Vencimiento:</strong><label> {{ tarea[0].tarea.fecha_vencimiento }}</label></p>
+        <p>Tarea con un valor de <strong> {{ tarea[0].tarea.valor }}</strong> Tokens</p>
 
 
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
           <h4>Adjuntos de estudiante</h4>    
-          <div style="float: left;padding: 10px;">
-              <img src="http://phomework.com.co/www/php/Subir/Tareas/doc_5a17661b86249.jpg" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+          <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[3].archivosestudiante track by $index">
+              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
           </div>
         </div>
 
 
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
         <h4>Solución</h4> 
-        <p>descricion</p>
+        <p>{{ tarea[4].archivosestudiante }}</p>
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
             <h4>Adjuntos de docente</h4> 
-          <div style="float: left;padding: 10px;">
-              <img src="http://phomework.com.co/www/php/Subir/Tareas/doc_5a17661b86249.jpg" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+          <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[4].archivosestudiante track by $index">
+              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
           </div>
         </div>
         

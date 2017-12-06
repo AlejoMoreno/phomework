@@ -1,4 +1,4 @@
-<ion-view title="Estudiante Panel" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+<ion-view title="Notificaciones" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
     <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 100px;overflow-y: hidden;" >
 
         <div class="bar-positive" style="position: absolute;left: -20px;top:-100px;width: 120%;padding:5px;border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);">
@@ -14,20 +14,17 @@
           }
         </style>
 
-        <a ng-click="go_mistareas()" style="padding:30px;">
-            <img width="120" style="margin-left: -35px;" src="http://phomework.com.co/www/image/tarea.png">
-        </a>    
-        <a ng-click="go_mistokens()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/monedas.png">
-        </a>
-        <a ng-click="go_subirtarea()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/subir.png">
-        </a>
-        <a ng-click="go_chatsoporte()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/pregunta.png">
-        </a>
+        <h1>Notificaciones</h1><br><br><br>
+
+        <ion-list ng-repeat="notificacion in notificaciones track by $index">
+            <div style="background: white;opacity: 0.7;width: 100%;padding: 20px;">
+                <h4>{{ notificacion.titulo }}</h4>
+                <div >{{ notificacion.texto }}</div>
+            </div>
+            <ion-item style="background: transparent;opacity: 0.7;width: 100%;height: 5px;border: 0px;"></ion-item>
+        </ion-list>
   
-  
+        <br><br><br><br>
       <ion-item style="background: #207ce5;border:0px;width: 110%;position:fixed;left: -15px;bottom: 0px;">
           <div id="contact" class="jumbotro text-center">
               <h6 style="color:white;">Copyright wakusoft@2017</h6>
