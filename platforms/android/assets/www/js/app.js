@@ -34,7 +34,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
             // TODO: Update with your OneSignal AppId before running.
             window.plugins.OneSignal
-                .startInit("282a3ded-492a-49f2-9929-66f2e214deb7")
+                .startInit("d83f7a35-792a-4254-b6c5-1a7c3b0a1d9b")
                 .handleNotificationOpened(notificationOpenedCallback)
                 .inFocusDisplaying(window.plugins.OneSignal.OSInFocusDisplayOption.Notification)
                 .endInit();

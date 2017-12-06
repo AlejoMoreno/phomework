@@ -1,7 +1,4 @@
-var host = "https://backendv2.crawfordaffinitycolombia.com";
-//var host = "http://localhost:8000";
-//var host = "http://192.168.1.17:8080/push_Crawford/crawford/Crawford/public";
-//var host = "http://192.168.77.89";
+var host = "http://phomework.com.co/ionic/php/";
 
 angular.module('app.controllers', [])
 
@@ -181,6 +178,48 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
+            
+            $scope.form = {
+                'nickname'  :    'null',
+                'edad'      :    '',
+                'telefono'  :    '',
+                'correo'    :    '',
+                'clave'     :    '',
+                'claverepeat':   '',
+                'token'     :    localStorage.getItem('device_token'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+            };
+
+            $scope.save = function(){
+                $http({
+                    url: host + 'registroestudiante.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                    if(result.data.result == 'true'){
+                        alert('bienvenido '+result.data.body.correo );
+                        localStorage.setItem("clave", result.data.body.clave);
+                        localStorage.setItem("correo", result.data.body.correo);
+                        localStorage.setItem("edad", result.data.body.edad);
+                        localStorage.setItem("id", result.data.body.idestudiante);
+                        localStorage.setItem("nickname", result.data.body.nickname);
+                        localStorage.setItem("telefono", result.data.body.telefono);
+                        localStorage.setItem("device", result.data.body.tipo);
+                        localStorage.setItem("tipo", 'estudiante');
+                        $state.go('menu.estudiante_panel');
+                    }
+                    else{
+                        alert('Vuelve a intentar');
+                        console.log(result.data.body);
+                    }
+                    
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+
 
             $scope.gologin = function(){
                 $state.go('loginall');
@@ -193,6 +232,68 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state, $ionicLoading) {
 
+            $scope.form = {
+                'nombre' : '',
+                'apellido' : '',
+                'correo' : '',
+                'telefono' : '',
+                'direccion' : '',
+                'idadministrador' : '0',
+                'idareasEspecialista' : '',
+                'clave' : '',
+                'claveRepeat' : '',
+                'descripcion' : '',
+                'cuenta' : '',
+                'tipocuenta' : '',
+                'banco' : '',
+                'token' : localStorage.getItem('device_token'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+            };
+
+            //consultar area especialista========
+            $http({
+                url: host + 'consultas/consultaareasespecialista.php',
+                method: "POST",
+                data: {
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.areas = result.data.body;
+                console.log($scope.areas);                
+            }, function (err) {
+                console.log(err);
+            });
+            //FIN consultar area especialista========
+
+            $scope.save = function(){
+                $http({
+                    url: host + 'registrodocente.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                    if(result.data.result == 'true'){
+                        alert('bienvenido' + result.data.body.correo);
+                        localStorage.setItem("clave", result.data.body.clave);
+                        localStorage.setItem("correo", result.data.body.correo);
+                        localStorage.setItem("id", result.data.body.idprofesores);
+                        localStorage.setItem("nombre", result.data.body.nombre);
+                        localStorage.setItem("telefono", result.data.body.telefono);
+                        localStorage.setItem("device", result.data.body.tipo);
+                        localStorage.setItem("tipo", 'docente');
+                        $state.go('menu.docente_panel');
+                    }
+                    else{
+                        alert('Vuelve a intentar');
+                        console.log(result.data.body);
+                    }
+                    
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
             $scope.gologin = function(){
                 $state.go('loginall');
             };
@@ -204,33 +305,45 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
-            $scope.perfil = {
-                'id': localStorage.getItem("CRAWFORD_cliente"),
-                'nombre': localStorage.getItem("CRAWFORD_nombre"),
-                'email': localStorage.getItem("CRAWFORD_email"),
-                'lastname': localStorage.getItem("CRAWFORD_apellido"),
-                'cedula': localStorage.getItem("CRAWFORD_cedula"),
-                'celular': localStorage.getItem("CRAWFORD_celular"),
-                'password': ""
+            $scope.form = {
+                'correo': '',
+                'clave': '',
+                'token' : localStorage.getItem('device_token'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
             };
 
-            $scope.update_register = function () {
+            $scope.login = function () {
                 $http({
-                    url: host + '/clientes/update',
+                    url: host + 'login.php',
                     method: "POST",
-                    data: $scope.registro
+                    data: $scope.form
                 }).then(function (result) {
                     console.log(result);
-                    alert('Actualizado correctamente');
-                    $state.go('menu.bienvenid');
+                    if(result.data.body.error == null){
+                        alert('bienvenido '+result.data.body.correo);
+                        localStorage.setItem("clave", $scope.form.clave);
+                        localStorage.setItem("correo", result.data.body.correo);
+                        localStorage.setItem("id", result.data.body.id);
+                        localStorage.setItem("device", result.data.body.token);
+                        localStorage.setItem("tipo", result.data.body.tipo);
+                        if(result.data.body.tipo == 'docente'){
+                            $state.go('menu.docente_panel');
+                        }
+                        else{
+                            $state.go('menu.estudiante_panel');
+                        }
+                        
+                    }
+                    else{
+                        alert(result.data.body.error);
+                        console.log(result.data.body.error);
+                    }
+                    //alert('Bienvenido');
                 }, function (err) {
                     console.log(err);
                 });
             };
 
-            $scope.login = function(){
-                $state.go('menu.estudiante_panel');
-            };
 
         }])
 
@@ -243,7 +356,11 @@ angular.module('app.controllers', [])
                 var r = confirm("Desea salir?");
                 if (r == true) {
                     //cerrar sesion 
-                    $state.go('loginall');
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
                 } else {
                     $state.go("menu.estudiante_panel");
                 }
@@ -306,7 +423,23 @@ angular.module('app.controllers', [])
                 $state.go();
             };
 
-
+            //consultar area especialista========
+            $http({
+                url: host + 'consultas/consultarTareas.php',
+                method: "POST",
+                data: {
+                    "sentencia" : 'WHERE `idestudiante` = '+localStorage.getItem("id")+' ORDER BY `tareas`.`fecha_creacion` DESC ',
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.tareas = result.data.body; 
+                console.log("Tareas en espera"); 
+                console.log(result.data.body);          
+            }, function (err) {
+                console.log(err);
+            });
+            //FIN consultar area especialista========
 
 
             $scope.go_tareaid = function(){
@@ -687,7 +820,33 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
-
+            $scope.form = {
+                'comentario':'',
+                'id':localStorage.getItem('id'),
+                'correo':localStorage.getItem('correo'),
+                'token' : localStorage.getItem('device_token'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+            };
+            $scope.save = function(){
+                $http({
+                    url: host + 'comentario.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                    if(result.data.result == 'true'){
+                        alert('Mensaje enviado');
+                        $scope.form.comentario = '';
+                    }
+                    else{
+                        alert('Vuelve a intentar');
+                        console.log(result.data.body);
+                    }
+                    
+                }, function (err) {
+                    console.log(err);
+                });
+            };
         }])
 
     .controller('enviarMensajeCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

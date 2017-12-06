@@ -32,10 +32,20 @@
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
+            <span class="input-label">
+              <h3>Area</h3>
+            </span>
+            <select ng-model="form.idareasEspecialista" ng-options="id.idareasEspecialista as id.nombre for id in areas" >
+                <option value="">Seleccione El Area A Trabajar</option>
+              </select>
+          </label>
+        
+
+        <label class="item item-input" id="nuevoReclamo13-input27">
           <span class="input-label">
             <h3>Teléfono</h3>
           </span>
-          <input type="text" placeholder="ej.(3219045297)" ng-model="form.telefono">
+          <input type="tel" placeholder="ej.(3219045297)" ng-model="form.telefono">
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
@@ -51,14 +61,14 @@
           <span class="input-label">
             <h3>Clave</h3>
           </span>
-          <input type="text" placeholder="***" ng-model="form.clave">
+          <input type="password" placeholder="***" ng-model="form.clave">
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
           <span class="input-label">
             <h3>Repita Clave</h3>
           </span>
-          <input type="text" placeholder="***" ng-model="form.clave2">
+          <input type="password" placeholder="***" ng-model="form.claveRepeat">
         </label>
         
         <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
@@ -69,21 +79,21 @@
           <span class="input-label">
             <h3># Cta.</h3>
           </span>
-          <input type="text" placeholder="cuenta bancaria" ng-model="form.cuentabancaria">
+          <input type="text" placeholder="cuenta bancaria" ng-model="form.cuenta">
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
           <span class="input-label">
             <h3>Tipo Cta.</h3>
           </span>
-          <input type="text" placeholder="Tipo cuenta bancaria" ng-model="form.tipocuentabancaria">
+          <input type="text" placeholder="Tipo cuenta bancaria" ng-model="form.tipocuenta">
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
           <span class="input-label">
             <h3>Banco</h3>
           </span>
-          <input type="text" placeholder="Nombre banco" ng-model="form.nombrebanco">
+          <input type="text" placeholder="Nombre banco" ng-model="form.banco">
         </label>
 
         <label class="item item-input" id="nuevoReclamo13-input27">
@@ -94,7 +104,7 @@
         </label>
 
         <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-        <ion-item ng-click="save()" style="background:#53ad1b;border:1px solid #53ad1b;width: 100%;">
+        <ion-item ng-click="save();" style="background:#53ad1b;border:1px solid #53ad1b;width: 100%;">
           <div class="panel-body" style="text-align: center;"><h2 style="color:white">Registrar en Phomework</h2></div>
         </ion-item>
         <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>

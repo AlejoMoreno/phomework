@@ -119,10 +119,14 @@ angular.module('app.routes', [])
                 controller: 'escanearCtrl'
             })
 
-            .state('payu', {
-                url: '/payu',
-                templateUrl: 'templates/payu.html',
-                controller: 'payuCtrl'
+            .state('menu.subirtarea', {
+                url: '/subirtarea',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/subirtarea.html',
+                        controller: 'subirtareaCtrl'
+                    }
+                } 
             })
 
             .state('menu.caso1402', {
