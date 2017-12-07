@@ -81,7 +81,7 @@ angular.module('app.routes', [])
             .state('menu.tareaid', {
                 url: '/tareaid',
                 params: {
-                    tareaid: "",
+                    tareaid: ""
                 },
                 views: {
                     'side-menu21': {
@@ -123,6 +123,9 @@ angular.module('app.routes', [])
 
             .state('menu.descubre', {
                 url: '/descubre',
+                params:{
+                    idtareas:''
+                },
                 views: {
                     'side-menu21': {
                         templateUrl: 'templates/descubre.html',

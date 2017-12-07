@@ -434,7 +434,7 @@ angular.module('app.controllers', [])
                 url: host + 'consultas/consultarTareas.php',
                 method: "POST",
                 data: {
-                    "sentencia" : 'WHERE `idestudiante` = '+localStorage.getItem("id")+' ORDER BY `tareas`.`fecha_creacion` DESC ',
+                    "sentencia" : 'WHERE `idestudiante` = '+localStorage.getItem("id")+' ORDER BY `tareas`.`idtareas` DESC ',
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
@@ -508,9 +508,16 @@ angular.module('app.controllers', [])
                 console.log(err);
             });
 
-            $scope.go_descubre = function(){
-                alert('descubre');
-                $state.go('menu.descubre');
+            $scope.go_descubre = function(id){
+                $state.go('menu.descubre',{
+                    idtareas: id
+                });
+            };
+
+            $scope.download = function(fileURL){
+                console.log(fileURL);
+                var _window = window.open('http://phomework.com.co/www/php/Subir/'+fileURL, '_blank');
+                _window.document.close();
             };
             
 
@@ -739,7 +746,21 @@ angular.module('app.controllers', [])
                 $state.go('menu.chat');
             };
 
-            
+            console.log($stateParams);
+            $http({
+                url: host + 'consultas/consultarsolicitud.php',
+                method: "POST",
+                data: {
+                    "id" : $stateParams.idtareas,
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log('SOLICITUDES ....');
+                console.log(result);
+                $scope.solicitudes = result.data.body;
+            }, function (err) {
+                console.log(err);
+            });
         }
 
     ])

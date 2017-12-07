@@ -1,4 +1,4 @@
-<ion-view title="Estudiante Panel" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+<ion-view title="Perfil Docente" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
     <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 100px;overflow-y: hidden;" >
 
         <div class="bar-positive" style="position: absolute;left: -20px;top:-100px;width: 120%;padding:5px;border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);">
@@ -14,18 +14,32 @@
           }
         </style>
 
-        <a ng-click="go_mistareas()" style="padding:30px;">
-            <img width="120" style="margin-left: -35px;" src="http://phomework.com.co/www/image/tarea.png">
-        </a>    
-        <a ng-click="go_mistokens()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/monedas.png">
-        </a>
-        <a ng-click="go_subirtarea()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/subir.png">
-        </a>
-        <a ng-click="go_chatsoporte()" style="padding:20px;">
-            <img width="120" src="http://phomework.com.co/www/image/pregunta.png">
-        </a>
+        <center><img width="200" src="https://image.flaticon.com/icons/svg/609/609001.svg"></center><br><br>
+          <label class="item item-input" id="nuevoReclamo13-input27">
+            <span class="input-label">
+              <h3>Teléfono</h3>
+            </span>
+            <input type="tel" placeholder="ej.(3219045297)" ng-model="form.telefono">
+          </label>
+  
+          <label class="item item-input" id="nuevoReclamo13-input27">
+            <span class="input-label">
+              <h3>Correo</h3>
+            </span>
+            <input type="text" placeholder="ej.(admin@admin.com)" ng-model="form.correo">
+          </label>
+  
+          <label class="item item-input" id="nuevoReclamo13-input27">
+            <span class="input-label">
+              <h3>Clave</h3>
+            </span>
+            <input type="password" placeholder="***" ng-model="form.clave">
+          </label>          
+  
+          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
+          <ion-item ng-click="save();" style="background:#53ad1b;border:1px solid #53ad1b;width: 100%;">
+            <div class="panel-body" style="text-align: center;"><h2 style="color:white">Actualizate en Phomework</h2></div>
+          </ion-item><br><br><br><br>
   
   
       <ion-item style="background: #207ce5;border:0px;width: 110%;position:fixed;left: -15px;bottom: 0px;">

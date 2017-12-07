@@ -14,14 +14,15 @@
           }
         </style>
 
-        <ion-list style="border:0px;">
+        <ion-list style="border:0px;" ng-repeat="solicitud in solicitudes track by $index">
           <ion-item ng-click="go_chat();"  style="border: 0px;background: white;opacity: 0.8;">
             <div style="float: left; border-radius: 200px 200px 200px 200px;
             -moz-border-radius: 200px 200px 200px 200px;
             -webkit-border-radius: 200px 200px 200px 200px;
             border: 0px solid #000000; width: 50px;height: 50px;background: black;color: white;">
-            <label style="position:relative;top:15px;left: 15px;">do</label></div>
-            <label style="float: left;padding: 10px;">titulo tarea</label>
+            <label style="position:relative;top:15px;left: 15px;">{{ solicitud.id_docente.nombre }}</label></div>
+            <label style="float: left;padding: 10px;">{{ solicitud.id_docente.correo }}</label>
+            <label style="float: left;padding: 10px;">Tarea: {{ solicitud.id_tarea.nombre }}</label>
           </ion-item>
         </ion-list>
   
@@ -30,7 +31,9 @@
     background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
     filter: blur(0px);
   }
-  
+  h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
   .item-input{
     background: white;
     opacity: 0.7;

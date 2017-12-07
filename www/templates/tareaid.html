@@ -32,8 +32,10 @@
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
           <h4>Adjuntos de estudiante</h4>    
           <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[3].archivosestudiante track by $index">
-              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
-          </div>
+            <a ng-click="download( doc.url );">
+              <img src="http://phomework.com.co/www/php/Subir/{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+            </a>
+          </div>  
         </div>
 
 
@@ -43,12 +45,14 @@
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
             <h4>Adjuntos de docente</h4> 
           <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[4].archivosestudiante track by $index">
-              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+            <a onclick="window.open('http://phomework.com.co/www/php/Subir/{{ doc.url }}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
+              <img src="http://phomework.com.co/www/php/Subir/{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+            </a> 
           </div>
         </div>
         
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
-        <div  ng-click="go_descubre();" style="background: #0c60ee;border: 0px;text-align: center;color: white;width: 100%;padding: 10px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
+        <div  ng-click="go_descubre( tarea[0].tarea.idtareas );" style="background: #0c60ee;border: 0px;text-align: center;color: white;width: 100%;padding: 10px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
         -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
         box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);">Descubre quien esta interesado en resolver tus tareas</div>
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
@@ -58,7 +62,9 @@
     background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
     filter: blur(0px);
   }
-  
+  h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
   .item-input{
     background: white;
     opacity: 0.7;
