@@ -1,4 +1,8 @@
 <ion-view title="Registro" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+    <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
+    <!--ion-nav-title>
+      <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
+    </ion-nav-title-->
     <ion-content padding="true" id="body1">
 
 
@@ -56,15 +60,6 @@
                   <h6 style="color: #207ce5;">¿Ya tienes cuenta?</h6>
               </div>
           </ion-item>
-          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item style="background: #207ce5;border:0px;width: 110%;position:fixed;left: -15px;bottom: 0px;">
-            <div id="contact" class="jumbotro text-center">
-                <h6 style="color:white;">Copyright wakusoft@2017</h6>
-            </div>
-        </ion-item>
 
       </form>
 
@@ -74,24 +69,17 @@
     background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
     filter: blur(0px);
   }
-  #body1:before {
-    content: "";
-    position: absolute;
-    background: url(http://phomework.com.co/www/image/fondo5.jpg);
-    background-size: cover;
-    z-index: -1; /* Keep the background behind the content */
-    height: 19%; width: 25%; /* Using Glen Maddern's trick /via @mente */
-
-    /* don't forget to use the prefixes you need */
-    transform: scale(5);
-    transform-origin: top left;
-    filter: blur(2px);
-}
   .item-input{
     background: white;
     opacity: 0.7;
   }
+  h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
 </style>
 
     </ion-content>
+    <div class="bar bar-footer bar-positive">
+        <div class="title">Copyright wakusoft@2017</div>
+      </div>
   </ion-view>

@@ -212,6 +212,9 @@ angular.module('app.routes', [])
 
             .state('menu.chat', {
                 url: '/chat',
+                params:{
+                    receptor : ''
+                },
                 views: {
                     'side-menu21': {
                         templateUrl: 'templates/chat.html',

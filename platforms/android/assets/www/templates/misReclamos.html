@@ -1,4 +1,8 @@
 <ion-view title="Estudiante panel" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+    <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
+    <!--ion-nav-title>
+      <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
+    </ion-nav-title-->
   <ion-content padding="true" id="body1">
 
 
@@ -10,19 +14,7 @@
   background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
   filter: blur(0px);
 }
-#body1:before {
-  content: "";
-  position: absolute;
-  background: url(http://phomework.com.co/www/image/fondo5.jpg);
-  background-size: cover;
-  z-index: -1; /* Keep the background behind the content */
-  height: 19%; width: 25%; /* Using Glen Maddern's trick /via @mente */
 
-  /* don't forget to use the prefixes you need */
-  transform: scale(5);
-  transform-origin: top left;
-  filter: blur(2px);
-}
 .item-input{
   background: white;
   opacity: 0.7;
@@ -30,4 +22,7 @@
 </style>
 
   </ion-content>
+  <div class="bar bar-footer bar-positive">
+      <div class="title">Copyright wakusoft@2017</div>
+    </div>
 </ion-view>

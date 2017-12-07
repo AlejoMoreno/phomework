@@ -489,8 +489,8 @@ angular.module('app.controllers', [])
                 $state.go('menu.miperfilestudiante');
             };
 
-            console.log('Datos request...');
-            console.log($stateParams.tareaid);
+            console.log('Datos request tareaID...');
+            console.log($stateParams);
             //consultar todos los datos de la tarea
             $http({
                 url: host + 'consultas/consultarTareaIdestudiante.php',
@@ -711,40 +711,53 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('descubreCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('descubreCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicLoading) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
                 if (r == true) {
                     //cerrar sesion 
-                    $state.go('loginall');
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
                 } else {
                     $state.go("menu.estudiante_panel");
                 }
                 
             };
+            $scope.go_panel = function(){
+                $state.go('menu.estudiante_panel');
+            };
             $scope.go_fqs = function(){
                 alert('preguntas frecuentes');
-                $state.go();
+                $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
-                alert('notificaciones');
-                $state.go();
+                $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                alert('mi perfil');
-                $state.go();
+                $state.go('menu.miperfilestudiante');
             };
 
 
 
-            $scope.go_chat = function(){
-                alert('Chat');
-                $state.go('menu.chat');
+            $scope.go_chat = function(id){
+                console.log('seleccionado al chat '+ id);
+                $state.go('menu.chat',{
+                    receptor : id
+                });
             };
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $state.go('menu.tareaid',{
+                    tareaid : $stateParams.idtareas
+                });
+            }, 100);
 
             console.log($stateParams);
             $http({
@@ -774,23 +787,28 @@ angular.module('app.controllers', [])
                 var r = confirm("Desea salir?");
                 if (r == true) {
                     //cerrar sesion 
-                    $state.go('loginall');
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
                 } else {
                     $state.go("menu.estudiante_panel");
                 }
                 
             };
+            $scope.go_panel = function(){
+                $state.go('menu.estudiante_panel');
+            };
             $scope.go_fqs = function(){
                 alert('preguntas frecuentes');
-                $state.go();
+                $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
-                alert('notificaciones');
-                $state.go();
+                $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                alert('mi perfil');
-                $state.go();
+                $state.go('menu.miperfilestudiante');
             };
 
 
@@ -1109,15 +1127,18 @@ angular.module('app.controllers', [])
             $scope.message = {
                 'message': '',
                 'state': 'ENVIADO',
-                'sender': localStorage.getItem("CRAWFORD_cliente"),
-                'receptor': '1' //id administrador
+                'tipo': localStorage.getItem("tipo"),
+                'sender': localStorage.getItem("id"),
+                'receptor': $stateParams.receptor, //id administrador
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
             };
-
+            console.log($scope.message);
             //buscar toda la informacion del chaat
             setInterval(function () {
                 $http({
-                    url: host + '/chats/historial/' + $scope.message.sender + '/1',
-                    method: "GET"
+                    url: host + 'chathistorial.php',
+                    method: "POST",
+                    data: $scope.message
                 }).then(function (result) {
                     console.log(result);
                     $scope.historiales = result.data.body;
@@ -1128,26 +1149,18 @@ angular.module('app.controllers', [])
 
             $scope.addmessage = function () {
                 console.log($scope.message);
-                if (this.validate() !== false) {
-                    $http({
-                        url: host + '/chats/create',
-                        method: "POST",
-                        contentType: "text/xml",
-                        dataType: "text",
-                        data: $scope.message,
-                    }).then(function (result) {
-                        console.log(result);
-                        if (result.data.Status == 'false') {
-                            alert(result.data.Message);
-                        }
-                        else {
-                            $scope.message.message = '';
-                            $state.go('menu.chat');
-                        }
-                    }, function (err) {
-                        console.log(err);
-                    });
-                }
+                $http({
+                    url: host + 'chat.php',
+                    method: "POST",
+                    contentType: "text/xml",
+                    dataType: "text",
+                    data: $scope.message,
+                }).then(function (result) {
+                    console.log(result);
+                    $scope.message.message = '';
+                }, function (err) {
+                    console.log(err);
+                });
             };
 
             $scope.validate = function () {
