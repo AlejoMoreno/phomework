@@ -828,7 +828,7 @@ angular.module('app.controllers', [])
 
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading) {
 
-            $scope.reclamo = $stateParams;
+            $scope.inicio = $stateParams;
             $scope.file = {
                 'file': '',
                 'host': host
@@ -838,18 +838,6 @@ angular.module('app.controllers', [])
                 'ms': 'Respuesta',
                 'foto': ""
             }
-
-            //buscar toda la informacion del reclamo
-            $http({
-                url: host + '/documentsmodel/reclamo/' + $scope.reclamo.id_reclamo + '?listcheking=' + $scope.reclamo.id_checklist ,
-                method: "GET"
-            }).then(function (result) {
-                console.log('resultado');
-                console.log(result.data.body);
-                $scope.documents = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
 
             $scope.delete = function (document) {
                 var r = confirm("Se eliminara esta foto. Esta de acuerdo?");
@@ -972,11 +960,16 @@ angular.module('app.controllers', [])
                 //     'redirect': 'crawford'
                 // };
                 var data = {
-                    'FileType': 'camara',
+                    'titulo': $stateParams.titulo,
+                    'descripcion': $stateParams.descripcion,
+                    'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                    'valor': $stateParams.valor,
+                    'id' : localStorage.getItem('id'),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                    'token': localStorage.getItem('device'),
+                    'first':'',
+                    'last':'',
                     'image_content': $scope.respuesta.foto,
-                    'reclamo': $scope.reclamo.id_reclamo,
-                    'cliente': localStorage.getItem("CRAWFORD_cliente"),
-                    'listcheking': $scope.reclamo.id_checklist
                 };
 
                 // Setup the loader
@@ -989,21 +982,11 @@ angular.module('app.controllers', [])
                 });
 
                 $http({
-                    url: host + '/documentsmodel/uploadSubmitAPP',
+                    url: host + 'Subir/Estudiantes.php',
                     method: "POST",
                     data: data
                 }).then(function (result) {
-                    if (result.data.Status == 'false') {
-                        $ionicLoading.hide();
-                        alert(result.data.Message);
-                    }
-                    else {
-                        console.log(result);
-                        $scope.respuesta.ms = result;
-                        $scope.respuesta.foto = data;
-                        $ionicLoading.hide();
-                        $state.transitionTo('escanear', $scope.reclamo, {reload: true, notify:true});
-                    }
+                    console.log(result);
                 }, function (err) {
                     console.log(err);
                     $ionicLoading.hide();
@@ -1053,12 +1036,32 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
 
+            $scope.form = {
+                'titulo': '',
+                'descripcion': '',
+                'fecha_vencimiento': '',
+                'valor': '0',
+                'id' : localStorage.getItem('id'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                'token': localStorage.getItem('device'),
+                'first': "TRUE",
+                'last':''
+            }
+            
             $scope.guardar = function(){
-                $state.go();
+                $http({
+                    url: host + 'registrotarea.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                }, function (err) {
+                    console.log(err);
+                });
             };
 
             $scope.escanner = function(){
-                $state.go('escanear');
+                $state.go('escanear',$scope.form);
             };
 
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 

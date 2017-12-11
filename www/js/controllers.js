@@ -391,7 +391,9 @@ angular.module('app.controllers', [])
                 $state.go('menu.subirtarea');
             };
             $scope.go_chatsoporte = function(){
-                $state.go('menu.chat');
+                $state.go('menu.chat',{
+                    'receptor':0
+                });
             };
 
         }])
@@ -519,7 +521,27 @@ angular.module('app.controllers', [])
                 var _window = window.open('http://phomework.com.co/www/php/Subir/'+fileURL, '_blank');
                 _window.document.close();
             };
-            
+            $scope.calificacion = {
+                'valor':''
+            };
+            $scope.calificar = function(tarea){
+                $http({
+                    url: host + 'calificacion.php',
+                    method: "POST",
+                    data: {
+                        'idtarea':tarea,
+                        'comentarios': 'Sin comentario',
+                        'calificacion': $scope.calificacion.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                    }
+                }).then(function (result) {
+                    console.log(result);
+                    alert('Guardado exitoso');
+                }, function (err) {
+                    console.log(err);
+                });
+            };
 
         }])
 
@@ -774,6 +796,7 @@ angular.module('app.controllers', [])
             }, function (err) {
                 console.log(err);
             });
+
         }
 
     ])
@@ -811,7 +834,39 @@ angular.module('app.controllers', [])
                 $state.go('menu.miperfilestudiante');
             };
 
+            $http({
+                url: host + 'consultas/consultarTokens.php',
+                method: "POST",
+                data: {
+                    'consulta' : 'Cantidad',
+                    "idestudiante" : localStorage.getItem("id"),
+                    "tipo" : localStorage.getItem("tipo"),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.tokens = {"cantidad":result.data.body};
+            }, function (err) {
+                console.log(err);
+                $ionicLoading.hide();
+            });
 
+            $http({
+                url: host + 'consultas/consultarTokens.php',
+                method: "POST",
+                data: {
+                    'consulta' : 'historico',
+                    "idestudiante" : localStorage.getItem("id"),
+                    "tipo" : localStorage.getItem("tipo"),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.historial = result.data.body;
+            }, function (err) {
+                console.log(err);
+                $ionicLoading.hide();
+            });
 
             $scope.go_payu = function(){
                 $state.go('payu');
@@ -828,28 +883,17 @@ angular.module('app.controllers', [])
 
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading) {
 
-            $scope.reclamo = $stateParams;
+            $scope.inicio = $stateParams;
             $scope.file = {
                 'file': '',
-                'host': host
+                'host': host,
+                'cont': 0
             };
             console.log($scope.reclamo);
             $scope.respuesta = {
                 'ms': 'Respuesta',
                 'foto': ""
             }
-
-            //buscar toda la informacion del reclamo
-            $http({
-                url: host + '/documentsmodel/reclamo/' + $scope.reclamo.id_reclamo + '?listcheking=' + $scope.reclamo.id_checklist ,
-                method: "GET"
-            }).then(function (result) {
-                console.log('resultado');
-                console.log(result.data.body);
-                $scope.documents = result.data.body;
-            }, function (err) {
-                console.log(err);
-            });
 
             $scope.delete = function (document) {
                 var r = confirm("Se eliminara esta foto. Esta de acuerdo?");
@@ -971,13 +1015,36 @@ angular.module('app.controllers', [])
                 //     'FileType': 'camara',
                 //     'redirect': 'crawford'
                 // };
-                var data = {
-                    'FileType': 'camara',
-                    'image_content': $scope.respuesta.foto,
-                    'reclamo': $scope.reclamo.id_reclamo,
-                    'cliente': localStorage.getItem("CRAWFORD_cliente"),
-                    'listcheking': $scope.reclamo.id_checklist
-                };
+
+                
+                if($scope.file.cont == 0){
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'TRUE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                    };
+                }
+                else{
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'FALSE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                    };
+                }
 
                 // Setup the loader
                 $ionicLoading.show({
@@ -989,21 +1056,14 @@ angular.module('app.controllers', [])
                 });
 
                 $http({
-                    url: host + '/documentsmodel/uploadSubmitAPP',
+                    url: host + 'Subir/Estudiantes.php',
                     method: "POST",
                     data: data
                 }).then(function (result) {
-                    if (result.data.Status == 'false') {
-                        $ionicLoading.hide();
-                        alert(result.data.Message);
-                    }
-                    else {
-                        console.log(result);
-                        $scope.respuesta.ms = result;
-                        $scope.respuesta.foto = data;
-                        $ionicLoading.hide();
-                        $state.transitionTo('escanear', $scope.reclamo, {reload: true, notify:true});
-                    }
+                    console.log(result);
+                    $ionicLoading.hide();
+                    $scope.file.cont = 1;
+                    //$state.transitionTo('escanear', $stateParams, {reload: true, notify:true});
                 }, function (err) {
                     console.log(err);
                     $ionicLoading.hide();
@@ -1012,14 +1072,9 @@ angular.module('app.controllers', [])
             };
 
             $scope.go_checklist = function () {
-                $state.transitionTo('checklist', {
-                        "id_reclamo": $stateParams.id_reclamo,
-                        "tipo_poliza": $stateParams.tipo_poliza
+                $state.transitionTo('menu.estudiante_panel', {
+                        "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
-               /* $state.go('checklist', {
-                    "id_reclamo": $stateParams.id_reclamo,
-                    "tipo_poliza": $stateParams.tipo_poliza
-                });*/
             };
 
             $scope.borrar = function () {
@@ -1053,12 +1108,35 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
 
+            $scope.form = {
+                'titulo': '',
+                'descripcion': '',
+                'fecha_vencimiento': '',
+                'valor': '0',
+                'id' : localStorage.getItem('id'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                'token': localStorage.getItem('device'),
+                'first': "TRUE",
+                'last':''
+            }
+            
             $scope.guardar = function(){
-                $state.go();
+                $http({
+                    url: host + 'registrotarea.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                    $state.transitionTo('menu.estudiante_panel', {
+                        "PHOMEWORK_cliente": localStorage.getItem('id')
+                    }, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                });
             };
 
             $scope.escanner = function(){
-                $state.go('escanear');
+                $state.go('escanear',$scope.form);
             };
 
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 

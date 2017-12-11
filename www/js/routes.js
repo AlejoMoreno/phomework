@@ -147,9 +147,10 @@ angular.module('app.routes', [])
             .state('escanear', {
                 url: '/camara',
                 params: {
-                    id_reclamo: "",
-                    id_checklist: "",
-                    tipo_poliza: ""
+                    titulo:'',
+                    descripcion:'',
+                    fecha_vencimiento:'',
+                    valor:''
                 },
                 templateUrl: 'templates/escanear.html',
                 controller: 'escanearCtrl'
