@@ -1,4 +1,4 @@
-<ion-view title="Subir tarea" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+<ion-view title="Solucionar tarea" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
     <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
@@ -26,27 +26,20 @@
     
           <label class="item item-input" id="nuevoReclamo13-input27">
             <span class="input-label">
-              <h3>Título:</h3>
+              <h3>Cantidad Tokens:</h3>
             </span>
-            <input type="text" placeholder="ej.(Tarea nueva)" ng-model="form.titulo">
+            <input type="number" placeholder="Escriba el valor que se acordó para esta tarea (Tokens)" ng-model="form.valor">
           </label>
     
           <label class="item item-input" id="nuevoReclamo13-input27">
             <span class="input-label">
               <h3>Descripción</h3>
             </span>
-            <input type="text" placeholder="" ng-model="form.descripcion">
+            <input type="text" placeholder="Escribe la solución de tu tarea" ng-model="form.descripcion">
           </label>
 
-          <label class="item item-input" id="nuevoReclamo13-input27">
-            <span class="input-label">
-                <h3>Vencimiento</h3>
-            </span>
-            <input type="date" placeholder="" ng-model="form.fecha_vencimiento">
-          </label>
-          
           <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item ng-click="escanner()" style="background:black;border:1px solid black;width: 100%;">
+          <ion-item ng-click="escannersolucion()" style="background:black;border:1px solid black;width: 100%;">
             <div class="panel-body" style="text-align: center;"><h2 style="color:white">Adjuntar Archivo</h2></div>
           </ion-item>
 

@@ -1,4 +1,4 @@
-<ion-view title="Perfil Estudiante" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+<ion-view title="Mis tareas vistas/solucionadas" hide-back-button="true" cache-view="false" id="page5">
     <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
@@ -18,33 +18,20 @@
           }
         </style>
 
-        <center><img width="200" src="https://image.flaticon.com/icons/svg/201/201811.svg"></center><br><br>
-          <label class="item item-input" id="nuevoReclamo13-input27">
-            <span class="input-label">
-              <h3>Teléfono</h3>
-            </span>
-            <input type="tel" placeholder="ej.(3219045297)" ng-model="form.telefono">
-          </label>
+        <ion-list ng-repeat="tarea in tareas track by $index">
+            <ion-item ng-click="go_tareaid({{ tarea.idtareas }})" style="background: white;opacity: 0.7;width: 100%;">
+              <h4 style="text-align: left">ID: {{ tarea.idtareas }}</h4>
+              <h4 style="text-align: center">{{ tarea.nombre }}</h4>
+              <p style="text-align: center">{{ tarea.descripcion }}</p>
+              <small style="text-align: center">vence: {{ tarea.fecha_vencimiento }}</small><br>
+              <small style="text-align: center;color: green;">calificación: {{ tarea.calificacion }}</small><br>
+              <div style="position: relative; background: #0c60ee;width: 130%;color:white;text-align: center;padding:10px;left: -40px;bottom: -16px;">{{ tarea.estado }}</div>
+            </ion-item>
+            <ion-item style="background: transparent;opacity: 0.7;width: 100%;height: 5px;border: 0px;"></ion-item>
+        </ion-list>
+        
   
-          <label class="item item-input" id="nuevoReclamo13-input27">
-            <span class="input-label">
-              <h3>Correo</h3>
-            </span>
-            <input type="text" placeholder="ej.(admin@admin.com)" ng-model="form.correo">
-          </label>
-  
-          <label class="item item-input" id="nuevoReclamo13-input27">
-            <span class="input-label">
-              <h3>Clave</h3>
-            </span>
-            <input type="password" placeholder="***" ng-model="form.clave">
-          </label>          
-  
-          <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
-          <ion-item ng-click="save();" style="background:#53ad1b;border:1px solid #53ad1b;width: 100%;">
-            <div class="panel-body" style="text-align: center;"><h2 style="color:white">Actualizate en Phomework</h2></div>
-          </ion-item>
-  
+
   
   <style>
   #body1{

@@ -305,6 +305,14 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
+            //check login
+            if(localStorage.getItem('tipo') == 'estudiante' && localStorage.getItem('id') != ''){
+                $state.go('menu.estudiante_panel');
+            }
+            if(localStorage.getItem('tipo') == 'docente' && localStorage.getItem('id') != ''){
+                $state.go('menu.docente_panel');
+            }
+
             $scope.form = {
                 'correo': '',
                 'clave': '',
@@ -362,22 +370,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    }                    
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                }  
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
 
@@ -398,6 +420,69 @@ angular.module('app.controllers', [])
 
         }])
 
+    .controller('docente_panelCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $http, $state) {
+
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
+                } else {
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
+                }
+                
+            };
+            $scope.go_panel = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
+            };
+            $scope.go_fqs = function(){
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                $state.go('menu.notificaciones');
+            };
+            $scope.go_miperfil = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
+            };
+
+
+            $scope.go_mistareas = function(){
+                $state.go('menu.mistareasdocente');
+            };
+            $scope.go_tareasxsol = function(){
+                $state.go('menu.tareasxsol');
+            };
+            $scope.go_chatsoporte = function(){
+                $state.go('menu.chat',{
+                    'receptor':0
+                });
+            };
+
+        }])
+
+        
     .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -413,24 +498,37 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
-
             //consultar area especialista========
             $http({
                 url: host + 'consultas/consultarTareas.php',
@@ -457,6 +555,151 @@ angular.module('app.controllers', [])
             };
 
         }])
+        
+    .controller('mistareasdocenteCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $http, $state) {
+
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
+                } else {
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
+                }
+                
+            };
+            $scope.go_panel = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
+            };
+            $scope.go_fqs = function(){
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                $state.go('menu.notificaciones');
+            };
+            $scope.go_miperfil = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
+            };
+
+            $http({
+                url: host + 'consultas/consultarTareas.php',
+                method: "POST",
+                data: {
+                    "sentencia" : 'WHERE `idprofesor` = '+localStorage.getItem("id")+' ORDER BY `tareas`.`idtareas` DESC ',
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.tareas = result.data.body; 
+                console.log("Tareas en espera"); 
+                console.log(result.data.body);          
+            }, function (err) {
+                console.log(err);
+            });
+
+
+            $scope.go_tareaid = function(id){
+                $state.go('menu.tareaiddocente',{
+                    'tareaid' : id
+                });
+            };
+
+        }])
+
+    .controller('tareasxsolCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $http, $state) {
+
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
+                } else {
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
+                }
+                
+            };
+            $scope.go_panel = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
+            };
+            $scope.go_fqs = function(){
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                $state.go('menu.notificaciones');
+            };
+            $scope.go_miperfil = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
+            };
+            //consultar area especialista========
+            $http({
+                url: host + 'consultas/consultarTareas.php',
+                method: "POST",
+                data: {
+                    "sentencia" : "WHERE `estado` not like 'SOLUCIONADO'  ORDER BY `tareas`.`idtareas` DESC ",
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.tareas = result.data.body; 
+                console.log("Tareas en espera"); 
+                console.log(result.data.body);          
+            }, function (err) {
+                console.log(err);
+            });
+            //FIN consultar area especialista========
+
+
+            $scope.go_tareaid = function(id){
+                $state.go('menu.tareaiddocente',{
+                    'tareaid' : id
+                });
+            };
+
+        }])
 
     .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -473,22 +716,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
             console.log('Datos request tareaID...');
@@ -518,7 +775,114 @@ angular.module('app.controllers', [])
 
             $scope.download = function(fileURL){
                 console.log(fileURL);
-                var _window = window.open('http://phomework.com.co/www/php/Subir/'+fileURL, '_blank');
+                var _window = window.open(fileURL, '_blank');
+                _window.document.close();
+            };
+            $scope.calificacion = {
+                'valor':''
+            };
+            $scope.calificar = function(tarea){
+                $http({
+                    url: host + 'calificacion.php',
+                    method: "POST",
+                    data: {
+                        'idtarea':tarea,
+                        'comentarios': 'Sin comentario',
+                        'calificacion': $scope.calificacion.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                    }
+                }).then(function (result) {
+                    console.log(result);
+                    alert('Guardado exitoso');
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+        }])
+
+    .controller('tareaiddocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $http, $state, $ionicPlatform) {
+
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
+                } else {
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
+                }
+                
+            };
+            $scope.go_panel = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
+            };
+            $scope.go_fqs = function(){
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                $state.go('menu.notificaciones');
+            };
+            $scope.go_miperfil = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
+            };
+
+            console.log('Datos request tareaID...');
+            console.log($stateParams);
+            //consultar todos los datos de la tarea
+            $http({
+                url: host + 'consultas/consultarTareaIdestudiante.php',
+                method: "POST",
+                data: {
+                    'idtarea': $stateParams.tareaid,
+                    'tipo' : localStorage.getItem('tipo'),
+                    'id' : localStorage.getItem('id'),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                }
+            }).then(function (result) {
+                console.log(result);
+                $scope.tarea = result.data.body;
+            }, function (err) {
+                console.log(err);
+            });
+
+            $scope.go_descubre = function(id){
+                $state.go('menu.chat',{
+                    receptor: id
+                });
+            };
+
+            $scope.go_solucionar = function(id){
+                $state.go('menu.solucionar',{
+                    tarea:id
+                });
+            };
+
+            $scope.download = function(fileURL){
+                console.log(fileURL);
+                var _window = window.open(fileURL, '_blank');
                 _window.document.close();
             };
             $scope.calificacion = {
@@ -559,22 +923,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
             $scope.form = {
@@ -626,22 +1004,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.docente_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.docente_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfildocente');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
             $scope.form = {
@@ -694,22 +1086,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
             $http({
@@ -733,10 +1139,10 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('descubreCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('descubreCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -748,22 +1154,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
 
@@ -776,9 +1196,7 @@ angular.module('app.controllers', [])
             };
 
             $ionicPlatform.registerBackButtonAction(function () {
-                $state.go('menu.tareaid',{
-                    tareaid : $stateParams.idtareas
-                });
+                $ionicHistory.goBack();
             }, 100);
 
             console.log($stateParams);
@@ -816,22 +1234,36 @@ angular.module('app.controllers', [])
                     localStorage.setItem("tipo", '');
                     $state.go('menu.inicioDeSesiN');
                 } else {
-                    $state.go("menu.estudiante_panel");
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
                 }
                 
             };
             $scope.go_panel = function(){
-                $state.go('menu.estudiante_panel');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
             };
             $scope.go_fqs = function(){
-                alert('preguntas frecuentes');
                 $state.go('menu.preguntasFrecuentes');
             };
             $scope.go_misnotificaciones = function(){
                 $state.go('menu.notificaciones');
             };
             $scope.go_miperfil = function(){
-                $state.go('menu.miperfilestudiante');
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
             };
 
             $http({
@@ -877,11 +1309,11 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('escanearCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('escanearCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 
-        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading) {
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $ionicHistory ) {
 
             $scope.inicio = $stateParams;
             $scope.file = {
@@ -1043,6 +1475,7 @@ angular.module('app.controllers', [])
                         'first':'FALSE',
                         'last':'FALSE',
                         'image_content': $scope.respuesta.foto,
+                        'idtareas': $scope.tareas.idtareas
                     };
                 }
 
@@ -1062,6 +1495,7 @@ angular.module('app.controllers', [])
                 }).then(function (result) {
                     console.log(result);
                     $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
                     $scope.file.cont = 1;
                     //$state.transitionTo('escanear', $stateParams, {reload: true, notify:true});
                 }, function (err) {
@@ -1072,9 +1506,45 @@ angular.module('app.controllers', [])
             };
 
             $scope.go_checklist = function () {
-                $state.transitionTo('menu.estudiante_panel', {
+                // Setup the loader
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
+                var data = {
+                    'titulo': $stateParams.titulo,
+                    'descripcion': $stateParams.descripcion,
+                    'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                    'valor': $stateParams.valor,
+                    'id' : localStorage.getItem('id'),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                    'token': localStorage.getItem('device'),
+                    'first':'FALSE',
+                    'last':'TRUE',
+                    'image_content': $scope.respuesta.foto,
+                    'idtareas': $scope.tareas.idtareas
+                };
+
+                $http({
+                    url: host + 'Subir/Estudiantes.php',
+                    method: "POST",
+                    data: data
+                }).then(function (result) {
+                    console.log(result);
+                    $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
+                    $state.transitionTo('menu.estudiante_panel', {
                         "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+                
             };
 
             $scope.borrar = function () {
@@ -1096,7 +1566,271 @@ angular.module('app.controllers', [])
             };
 
             $ionicPlatform.registerBackButtonAction(function () {
-                console.log('no se puede ir atras');
+                $ionicHistory.goBack();
+            }, 100);
+
+        }
+
+    ])
+
+    .controller('escannersolucionCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $ionicHistory ) {
+
+            $scope.inicio = $stateParams;
+            $scope.file = {
+                'file': '',
+                'host': host,
+                'cont': 0
+            };
+            console.log($scope.reclamo);
+            $scope.respuesta = {
+                'ms': 'Respuesta',
+                'foto': ""
+            }
+
+            $scope.delete = function (document) {
+                var r = confirm("Se eliminara esta foto. Esta de acuerdo?");
+                if (r == true) {
+                    // Setup the loader
+                    $ionicLoading.show({
+                        content: 'Loading',
+                        animation: 'fade-in',
+                        showBackdrop: true,
+                        maxWidth: 200,
+                        showDelay: 0
+                    });
+                    $http({
+                        url: host + '/documentsmodel/delete/' + document,
+                        method: "GET"
+                    }).then(function (result) {
+                        console.log(result);
+                        alert(result.data.Message);
+                        //$state.go('escanear', $scope.reclamo);
+                        $ionicLoading.hide();
+                        $state.transitionTo('escanear', $scope.reclamo, {reload: true, notify:true});
+                    }, function (err) {
+                        console.log(err);
+                        $ionicLoading.hide();
+                    });
+                }                
+            };
+
+            $scope.folderFile = function(){
+                var cameraOptions = {
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.DATA_URL,      
+                    quality: 75,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    encodingType: Camera.EncodingType.JPEG,      
+                    correctOrientation: true
+                }; 
+                $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
+                    $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                    }  
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+            $scope.takePicture = function () {
+                var options = {
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    allowEdit: false,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+
+                };
+
+
+                $cordovaCamera.getPicture(options).then(function (imageData) {
+                    $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    //$scope.saveimage($scope.imgURI);
+                    $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                    }  
+                }, function (err) {
+                    console.log(err);
+                });
+
+            };
+
+            $scope.data = {
+                'file': ''
+            };
+
+            $scope.send = function (scope, element, attributes) {
+                // element.bind("change", function (changeEvent) {
+                //     var reader = new FileReader();
+                //     reader.onload = function (loadEvent) {
+                //         scope.$apply(function () {
+                //             scope.fileread = loadEvent.target.result;
+                //         });
+                //     }
+                //     reader.readAsDataURL(changeEvent.target.files[0]);
+                // });
+                var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                if (r == true) {
+                    $scope.saveimage();
+                }                
+            };
+
+            $scope.saveimage = function () {
+                //var file = document.getElementById('sortpicture').value;
+                //var file_data = file.prop('files')[0];
+                //$scope.respuesta.ms = file_data;
+                //var file_data = file;
+                /*var form_data = new FormData();
+                form_data.append('file', file_data);
+                form_data.append('reclamo', $scope.reclamo.id_reclamo);
+                form_data.append('cliente', localStorage.getItem("CRAWFORD_cliente"));
+                form_data.append('listcheking', $scope.reclamo.listcheking);
+                form_data.append('FileType', 'camara');
+                form_data.append('redirect', 'crawford');*/
+
+                //
+                // var data = {
+                //     'file': $scope.data.file,
+                //     'reclamo': $scope.reclamo.id_reclamo,
+                //     'cliente': localStorage.getItem("CRAWFORD_cliente"),
+                //     'listcheking': $scope.reclamo.listcheking,
+                //     'FileType': 'camara',
+                //     'redirect': 'crawford'
+                // };
+
+                
+                if($scope.file.cont == 0){
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'TRUE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                    };
+                }
+                else{
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'FALSE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                        'idtareas': $scope.tareas.idtareas
+                    };
+                }
+
+                // Setup the loader
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
+                $http({
+                    url: host + 'Subir/Estudiantes.php',
+                    method: "POST",
+                    data: data
+                }).then(function (result) {
+                    console.log(result);
+                    $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
+                    $scope.file.cont = 1;
+                    //$state.transitionTo('escanear', $stateParams, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+
+            };
+
+            $scope.go_checklist = function () {
+                // Setup the loader
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
+                var data = {
+                    'titulo': $stateParams.titulo,
+                    'descripcion': $stateParams.descripcion,
+                    'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                    'valor': $stateParams.valor,
+                    'id' : localStorage.getItem('id'),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                    'token': localStorage.getItem('device'),
+                    'first':'FALSE',
+                    'last':'TRUE',
+                    'image_content': $scope.respuesta.foto,
+                    'idtareas': $scope.tareas.idtareas
+                };
+
+                $http({
+                    url: host + 'Subir/Estudiantes.php',
+                    method: "POST",
+                    data: data
+                }).then(function (result) {
+                    console.log(result);
+                    $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
+                    $state.transitionTo('menu.estudiante_panel', {
+                        "PHOMEWORK_cliente": localStorage.getItem('id')
+                    }, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+                
+            };
+
+            $scope.borrar = function () {
+                var options = {
+                    title: '¿Quieres borrar esta imagen?',
+                    buttonLabels: ['Repetir'],
+                    addCancelButtonWithLabel: 'Cancelar',
+                    androidEnableCancelButton: true,
+                    winphoneEnableCancelButton: true,
+                    addDestructiveButtonWithLabel: 'Borrarla'
+
+                };
+
+                $cordovaActionSheet.show(options).then(function (btnIndex) {
+                    var index = btnIndex;
+
+                }, false);
+
+            };
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
             }, 100);
 
         }
@@ -1142,6 +1876,45 @@ angular.module('app.controllers', [])
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
 
         }])
+
+    .controller('solucionarCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
+
+            $scope.form = {
+                'valor': '',
+                'descripcion': '',
+                'id' : localStorage.getItem('id'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                'token': localStorage.getItem('device'),
+                'first': "TRUE",
+                'last':''
+            }
+            
+            $scope.guardar = function(){
+                $http({
+                    url: host + 'registrotarea.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    console.log(result);
+                    $state.transitionTo('menu.estudiante_panel', {
+                        "PHOMEWORK_cliente": localStorage.getItem('id')
+                    }, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+            $scope.escanner = function(){
+                $state.go('escanear',$scope.form);
+            };
+
+            /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
+
+        }])
+        
 
     .controller('caso1402Ctrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function

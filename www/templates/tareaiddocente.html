@@ -1,4 +1,4 @@
-<ion-view title="Tarea ID" hide-back-button="true" cache-view="false" id="page5">
+<ion-view title="Tarea ID (Docente)" hide-back-button="true" cache-view="false" id="page5">
     <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
@@ -18,10 +18,18 @@
           }
         </style>
 
-        <ion-item style="background: transparent;border: 1px solid #0c60ee;" ng-click="go_to({{ tarea[2].url }})">
-          <center><img width="30" src="{{ tarea[2].img }}"> 
-          {{ tarea[2].texto }}</center>
-        </ion-item>
+        <div ng-if=" tarea[0].tarea.estado == 'EN ESPERA' ">
+            <ion-item ng-click="go_solucionar(tarea[0].tarea.idtareas)" style="background: transparent;border: 1px solid #0c60ee;" ng-click="go_to({{ tarea[2].url }})">
+                <center><img width="30" src="{{ tarea[2].img }}"> 
+                {{ tarea[2].texto }}</center>
+              </ion-item>
+        </div>
+        <div ng-if=" tarea[0].tarea.estado == 'SOLUCIONADO' ">
+            <ion-item style="background: transparent;border: 1px solid #0c60ee;" ng-click="go_to({{ tarea[2].url }})">
+                <center><img width="30" src="{{ tarea[2].img }}"> 
+                {{ tarea[2].texto }}</center>
+              </ion-item>
+        </div>
 
 
         <h4 style="text-align: center" >{{ tarea[0].tarea.nombre }}<small><br>Id:{{ tarea[0].tarea.idtareas }}</small></h4>
@@ -56,13 +64,9 @@
         </div>
         
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
-        <div  ng-click="go_descubre( tarea[0].tarea.idtareas );" style="background: #0c60ee;border: 0px;text-align: center;color: white;width: 100%;padding: 10px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
+        <div  ng-click="go_descubre( tarea[0].tarea.idestudiante );" style="background: #0c60ee;border: 0px;text-align: center;color: white;width: 100%;padding: 10px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
         -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
-        box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);">Descubre quien esta interesado en resolver tus tareas</div>
-        <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
-        <label>Calificación Tarea</label>
-        <input ng-model="calificacion.valor" style="width: 100%;padding: 10px;opacity: 0.8;" placeholder="5-1"><div style="width: 100%;" ng-click="calificar(tarea[0].tarea.idtareas)" class="button button-positive">Califica Esta Tarea </div>
-        <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
+        box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);">Muestra interés por esta solicitud y contacta al estudiante dando clic aquí!.</div>
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
   <style>
   #body1{

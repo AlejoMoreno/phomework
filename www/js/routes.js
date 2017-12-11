@@ -68,6 +68,19 @@ angular.module('app.routes', [])
                 }
             })
 
+            .state('menu.docente_panel', {
+                url: '/docente_panel',
+                params: {
+                    PHOMEWORK_cliente: ''
+                },
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/docente_panel.html',
+                        controller: 'docente_panelCtrl'
+                    }
+                }
+            })
+
             .state('menu.mistareas', {
                 url: '/mistareas',
                 views: {
@@ -77,7 +90,27 @@ angular.module('app.routes', [])
                     }
                 }
             })
+            
+            .state('menu.mistareasdocente', {
+                url: '/mistareasdocente',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/mistareasdocente.html',
+                        controller: 'mistareasdocenteCtrl'
+                    }
+                }
+            })
 
+            .state('menu.tareasxsol', {
+                url: '/tareasxsol',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/tareasxsol.html',
+                        controller: 'tareasxsolCtrl'
+                    }
+                }
+            })
+            
             .state('menu.tareaid', {
                 url: '/tareaid',
                 params: {
@@ -90,6 +123,20 @@ angular.module('app.routes', [])
                     }
                 }                
             })
+
+            .state('menu.tareaiddocente', {
+                url: '/tareaiddocente',
+                params: {
+                    tareaid: ""
+                },
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/tareaiddocente.html',
+                        controller: 'tareaiddocenteCtrl'
+                    }
+                }                
+            })
+            
 
             .state('menu.miperfilestudiante', {
                 url: '/miperfilestudiante',
@@ -156,12 +203,35 @@ angular.module('app.routes', [])
                 controller: 'escanearCtrl'
             })
 
+            .state('escannersolucion', {
+                url: '/escannersolucion',
+                params: {
+                    titulo:'',
+                    descripcion:'',
+                    fecha_vencimiento:'',
+                    valor:''
+                },
+                templateUrl: 'templates/escannersolucion.html',
+                controller: 'escannersolucionCtrl'
+            })
+            
+
             .state('menu.subirtarea', {
                 url: '/subirtarea',
                 views: {
                     'side-menu21': {
                         templateUrl: 'templates/subirtarea.html',
                         controller: 'subirtareaCtrl'
+                    }
+                } 
+            })
+
+            .state('menu.solucionar', {
+                url: '/solucionar',
+                views: {
+                    'side-menu21': {
+                        templateUrl: 'templates/solucionar.html',
+                        controller: 'solucionarCtrl'
                     }
                 } 
             })

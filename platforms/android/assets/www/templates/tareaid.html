@@ -6,7 +6,7 @@
     <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 100px;" >
 
         <div class="bar-positive" style="position: absolute;left: -20px;top:-100px;width: 120%;padding:5px;border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);">
-          <img style="width: 30px;float: left;padding-top:5px; " src="http://phomework.com.co/www/image/phome-ico.png">
+          <img ng-click="go_panel()" style="width: 30px;float: left;padding-top:5px; " src="http://phomework.com.co/www/image/phome-ico.png">
           <div ng-click="go_cerrar()" style="width: 30px;float: right; padding:8px;padding-right:100px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-log-out"></i></div>
           <div ng-click="go_fqs()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-help-circled"></i></div>
           <div ng-click="go_misnotificaciones()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-android-notifications"></i></div>
@@ -37,7 +37,7 @@
           <h4>Adjuntos de estudiante</h4>    
           <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[3].archivosestudiante track by $index">
             <a ng-click="download( doc.url );">
-              <img src="http://phomework.com.co/www/php/Subir/{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
             </a>
           </div>  
         </div>
@@ -49,9 +49,9 @@
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
             <h4>Adjuntos de docente</h4> 
           <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[4].archivosestudiante track by $index">
-            <a onclick="window.open('http://phomework.com.co/www/php/Subir/{{ doc.url }}', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
-              <img src="http://phomework.com.co/www/php/Subir/{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
-            </a> 
+            <a ng-click="download( doc.url );">
+              <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
+            </a>
           </div>
         </div>
         
@@ -60,7 +60,10 @@
         -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);
         box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);">Descubre quien esta interesado en resolver tus tareas</div>
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
-  
+        <label>Calificación Tarea</label>
+        <input ng-model="calificacion.valor" style="width: 100%;padding: 10px;opacity: 0.8;" placeholder="5-1"><div style="width: 100%;" ng-click="calificar(tarea[0].tarea.idtareas)" class="button button-positive">Califica Esta Tarea </div>
+        <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
+        <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
   <style>
   #body1{
     background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
