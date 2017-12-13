@@ -1929,7 +1929,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams, $http, $state) {
             $scope.form = {
                 'comentario':'',
-                'id':localStorage.getItem('id'),
+                'id':0,
                 'correo':localStorage.getItem('correo'),
                 'token' : localStorage.getItem('device_token'),
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
@@ -1975,6 +1975,9 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
+            var fila = 0;
+            $scope.historiales = [];
+
             $scope.message = {
                 'message': '',
                 'state': 'ENVIADO',
@@ -1983,19 +1986,11 @@ angular.module('app.controllers', [])
                 'receptor': $stateParams.receptor, //id administrador
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
             };
+            //mensajes
             console.log($scope.message);
             //buscar toda la informacion del chaat
             setInterval(function () {
-                $http({
-                    url: host + 'chathistorial.php',
-                    method: "POST",
-                    data: $scope.message
-                }).then(function (result) {
-                    console.log(result);
-                    $scope.historiales = result.data.body;
-                }, function (err) {
-                    console.log(err);
-                });
+                $scope.show_history();
             }, 1000);
 
             $scope.addmessage = function () {
@@ -2008,7 +2003,50 @@ angular.module('app.controllers', [])
                     data: $scope.message,
                 }).then(function (result) {
                     console.log(result);
+                    $scope.show_history();
                     $scope.message.message = '';
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+            $http({
+                url: host + 'chathistorial.php',
+                method: "POST",
+                data: $scope.message
+            }).then(function (result) {
+                console.log(result);
+                $scope.historiales = result.data.body;
+                fila = result.data.body.length;
+            }, function (err) {
+                console.log(err);
+            });
+
+            $scope.show_history = function(){
+                $http({
+                    url: host + 'chathistorial.php',
+                    method: "POST",
+                    data: $scope.message
+                }).then(function (result) {
+                    console.log(result);
+                    filaother = fila;
+                    for(i = result.data.body.length; i > filaother ; i--){
+                        fila = result.data.body.length;
+                        console.log('filass__'+i);
+                        $scope.historiales.push(
+                            {
+                                estado : result.data.body[i-1].estado,
+                                fecha : result.data.body[i-1].fecha,
+                                idchat : result.data.body[i-1].idchat,
+                                idestudiante :  result.data.body[i-1].idestudiante,
+                                idprofesor : result.data.body[i-1].idprofesor,
+                                mensaje : result.data.body[i-1].mensaje
+                            }
+                        );
+                        console.log(result.data.body[i-1]);
+                    }
+                    console.log('fila # '+fila);
+                    //$scope.historiales = result.data.body;
                 }, function (err) {
                     console.log(err);
                 });

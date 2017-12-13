@@ -3,9 +3,9 @@
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
     </ion-nav-title-->
-  <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 100px;" >
+  <ion-content padding="true" class="js-chat-list" id="body1" style="float:left;padding: 20px;padding-top: 100px;" >
       
-    <ion-list ng-repeat="historial in historiales track by $index">
+    <ion-list ng-repeat="historial in historiales">
           
         <div ng-if="historial.vs[0] == message.sender ">
             <ion-item class="item-avatar" id="chat-list-item25" style="float: right;width: 100%;">
@@ -22,7 +22,6 @@
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
               </ion-item>
         </div>
-
       </ion-list>
     
   </ion-content>
