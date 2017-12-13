@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'ionic.native', 'ngCordova',])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'ionic.native', 'ngCordova', 'luegg.directives'])
 
     .config(function ($ionicConfigProvider, $sceDelegateProvider) {
         $ionicConfigProvider.backButton.text('').previousTitleText(false);

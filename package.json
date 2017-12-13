@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
+    "angularjs-scroll-glue": "^2.2.0",
     "cordova-android": "~6.3.0",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-camera": "^2.4.1",

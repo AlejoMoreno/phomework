@@ -420,11 +420,11 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('docente_panelCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('docente_panelCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
-
+        function ($scope, $stateParams, $http, $state, $ionicLoading) {
+            $ionicLoading.hide();
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
                 if (r == true) {
@@ -869,14 +869,29 @@ angular.module('app.controllers', [])
             });
 
             $scope.go_descubre = function(id){
-                $state.go('menu.chat',{
-                    receptor: id
+                $http({
+                    url: host + 'solicitud.php',
+                    method: "POST",
+                    data: {                        
+                        'id_tarea': $stateParams.tareaid,
+                        'tipo' : localStorage.getItem('tipo'),
+                        'id_docente' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                    }
+                }).then(function (result) {
+                    console.log(result);
+                    $state.go('menu.chat',{
+                        receptor: id
+                    });
+                }, function (err) {
+                    console.log(err);
                 });
+                
             };
 
             $scope.go_solucionar = function(id){
                 $state.go('menu.solucionar',{
-                    tarea:id
+                    idtarea:id
                 });
             };
 
@@ -1214,6 +1229,25 @@ angular.module('app.controllers', [])
             }, function (err) {
                 console.log(err);
             });
+
+            $scope.habilitar = function(tarea,docente){
+                console.log(tarea + " " + docente);
+                $http({
+                    url: host + 'asignar.php',
+                    method: "POST",
+                    data: {
+                        "tarea" : tarea,
+                        "docente" : docente,
+                        "id" : $stateParams.idtareas,
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                    }
+                }).then(function (result) {
+                    console.log(result);
+                    alert("Docente asignado correctamente");
+                }, function (err) {
+                    console.log(err);
+                });
+            };
 
         }
 
@@ -1713,35 +1747,15 @@ angular.module('app.controllers', [])
                 // };
 
                 
-                if($scope.file.cont == 0){
-                    var data = {
-                        'titulo': $stateParams.titulo,
-                        'descripcion': $stateParams.descripcion,
-                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
-                        'valor': $stateParams.valor,
-                        'id' : localStorage.getItem('id'),
-                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
-                        'token': localStorage.getItem('device'),
-                        'first':'TRUE',
-                        'last':'FALSE',
-                        'image_content': $scope.respuesta.foto,
-                    };
-                }
-                else{
-                    var data = {
-                        'titulo': $stateParams.titulo,
-                        'descripcion': $stateParams.descripcion,
-                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
-                        'valor': $stateParams.valor,
-                        'id' : localStorage.getItem('id'),
-                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
-                        'token': localStorage.getItem('device'),
-                        'first':'FALSE',
-                        'last':'FALSE',
-                        'image_content': $scope.respuesta.foto,
-                        'idtareas': $scope.tareas.idtareas
-                    };
-                }
+                var data = {
+                    'solucion': $stateParams.solucion,
+                    'valor': $stateParams.valor,
+                    'id' : localStorage.getItem('id'),
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                    'token': localStorage.getItem('device'),
+                    'image_content': $scope.respuesta.foto,
+                    'idtareas': $stateParams.idtarea
+                };
 
                 // Setup the loader
                 $ionicLoading.show({
@@ -1753,14 +1767,13 @@ angular.module('app.controllers', [])
                 });
 
                 $http({
-                    url: host + 'Subir/Estudiantes.php',
+                    url: host + 'Subir/Soluciones.php',
                     method: "POST",
                     data: data
                 }).then(function (result) {
                     console.log(result);
                     $ionicLoading.hide();
                     $scope.tareas = result.data.body;
-                    $scope.file.cont = 1;
                     //$state.transitionTo('escanear', $stateParams, {reload: true, notify:true});
                 }, function (err) {
                     console.log(err);
@@ -1779,34 +1792,28 @@ angular.module('app.controllers', [])
                     showDelay: 0
                 });
 
-                var data = {
-                    'titulo': $stateParams.titulo,
-                    'descripcion': $stateParams.descripcion,
-                    'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                $scope.data = {
+                    'idtarea' : $stateParams.idtarea,
                     'valor': $stateParams.valor,
+                    'solucion': $stateParams.solucion,
                     'id' : localStorage.getItem('id'),
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
-                    'token': localStorage.getItem('device'),
-                    'first':'FALSE',
-                    'last':'TRUE',
-                    'image_content': $scope.respuesta.foto,
-                    'idtareas': $scope.tareas.idtareas
-                };
+                    'token': localStorage.getItem('device')
+                }
 
                 $http({
-                    url: host + 'Subir/Estudiantes.php',
+                    url: host + 'registrosolucion.php',
                     method: "POST",
-                    data: data
+                    data: $scope.data
                 }).then(function (result) {
                     console.log(result);
+                    alert('Solucion guardada con exito');
                     $ionicLoading.hide();
-                    $scope.tareas = result.data.body;
-                    $state.transitionTo('menu.estudiante_panel', {
+                    $state.transitionTo('menu.docente_panel', {
                         "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
                 }, function (err) {
                     console.log(err);
-                    $ionicLoading.hide();
                 });
                 
             };
@@ -1883,23 +1890,23 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
 
             $scope.form = {
+                'idtarea' : $stateParams.idtarea,
                 'valor': '',
-                'descripcion': '',
+                'solucion': '',
                 'id' : localStorage.getItem('id'),
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
-                'token': localStorage.getItem('device'),
-                'first': "TRUE",
-                'last':''
+                'token': localStorage.getItem('device')
             }
             
             $scope.guardar = function(){
                 $http({
-                    url: host + 'registrotarea.php',
+                    url: host + 'registrosolucion.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
                     console.log(result);
-                    $state.transitionTo('menu.estudiante_panel', {
+                    alert('Solucion guardada con exito');
+                    $state.transitionTo('menu.docente_panel', {
                         "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
                 }, function (err) {
@@ -1907,8 +1914,8 @@ angular.module('app.controllers', [])
                 });
             };
 
-            $scope.escanner = function(){
-                $state.go('escanear',$scope.form);
+            $scope.escannersolucion = function(){
+                $state.go('escannersolucion',$scope.form);
             };
 
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
@@ -1929,7 +1936,7 @@ angular.module('app.controllers', [])
         function ($scope, $stateParams, $http, $state) {
             $scope.form = {
                 'comentario':'',
-                'id':localStorage.getItem('id'),
+                'id':0,
                 'correo':localStorage.getItem('correo'),
                 'token' : localStorage.getItem('device_token'),
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
@@ -1975,6 +1982,9 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
 
+            var fila = 0;
+            $scope.historiales = [];
+
             $scope.message = {
                 'message': '',
                 'state': 'ENVIADO',
@@ -1983,19 +1993,11 @@ angular.module('app.controllers', [])
                 'receptor': $stateParams.receptor, //id administrador
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
             };
+            //mensajes
             console.log($scope.message);
             //buscar toda la informacion del chaat
             setInterval(function () {
-                $http({
-                    url: host + 'chathistorial.php',
-                    method: "POST",
-                    data: $scope.message
-                }).then(function (result) {
-                    console.log(result);
-                    $scope.historiales = result.data.body;
-                }, function (err) {
-                    console.log(err);
-                });
+                $scope.show_history();
             }, 1000);
 
             $scope.addmessage = function () {
@@ -2008,7 +2010,50 @@ angular.module('app.controllers', [])
                     data: $scope.message,
                 }).then(function (result) {
                     console.log(result);
+                    $scope.show_history();
                     $scope.message.message = '';
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+            $http({
+                url: host + 'chathistorial.php',
+                method: "POST",
+                data: $scope.message
+            }).then(function (result) {
+                console.log(result);
+                $scope.historiales = result.data.body;
+                fila = result.data.body.length;
+            }, function (err) {
+                console.log(err);
+            });
+
+            $scope.show_history = function(){
+                $http({
+                    url: host + 'chathistorial.php',
+                    method: "POST",
+                    data: $scope.message
+                }).then(function (result) {
+                    console.log(result);
+                    filaother = fila;
+                    for(i = result.data.body.length; i > filaother ; i--){
+                        fila = result.data.body.length;
+                        console.log('filass__'+i);
+                        $scope.historiales.push(
+                            {
+                                estado : result.data.body[i-1].estado,
+                                fecha : result.data.body[i-1].fecha,
+                                idchat : result.data.body[i-1].idchat,
+                                idestudiante :  result.data.body[i-1].idestudiante,
+                                idprofesor : result.data.body[i-1].idprofesor,
+                                mensaje : result.data.body[i-1].mensaje
+                            }
+                        );
+                        console.log(result.data.body[i-1]);
+                    }
+                    console.log('fila # '+fila);
+                    //$scope.historiales = result.data.body;
                 }, function (err) {
                     console.log(err);
                 });

@@ -206,10 +206,12 @@ angular.module('app.routes', [])
             .state('escannersolucion', {
                 url: '/escannersolucion',
                 params: {
-                    titulo:'',
-                    descripcion:'',
-                    fecha_vencimiento:'',
-                    valor:''
+                    idtarea : '',
+                    valor : '',
+                    solucion : '',
+                    id : '',
+                    encrypt : '',
+                    token : ''
                 },
                 templateUrl: 'templates/escannersolucion.html',
                 controller: 'escannersolucionCtrl'
@@ -228,6 +230,9 @@ angular.module('app.routes', [])
 
             .state('menu.solucionar', {
                 url: '/solucionar',
+                params: {
+                    idtarea : ''
+                },
                 views: {
                     'side-menu21': {
                         templateUrl: 'templates/solucionar.html',

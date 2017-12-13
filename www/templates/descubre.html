@@ -15,14 +15,17 @@
         </style>
 
         <ion-list style="border:0px;" ng-repeat="solicitud in solicitudes track by $index">
-          <ion-item ng-click="go_chat( solicitud.id_docente.idprofesores );"  style="border: 0px;background: white;opacity: 0.8;">
-            <div style="float: left; border-radius: 200px 200px 200px 200px;
-            -moz-border-radius: 200px 200px 200px 200px;
-            -webkit-border-radius: 200px 200px 200px 200px;
-            border: 0px solid #000000; width: 50px;height: 50px;background: black;color: white;">
-            <label style="position:relative;top:15px;left: 20px;">{{ solicitud.id_docente.nombre[0]  }}</label></div>
-            <label style="float: left;padding-left: 15px;">Docente: {{ solicitud.id_docente.nombre }}</label><br>
-            <label style="float: left;padding-left: 15px;">Tarea: {{ solicitud.id_tarea.nombre }}</label>
+          <ion-item  style="border: 0px;background: white;opacity: 0.8;">
+            <div ng-click="go_chat( solicitud.id_docente.idprofesores );">
+              <div style="float: left; border-radius: 200px 200px 200px 200px;
+              -moz-border-radius: 200px 200px 200px 200px;
+              -webkit-border-radius: 200px 200px 200px 200px;
+              border: 0px solid #000000; width: 50px;height: 50px;background: black;color: white;">
+              <label style="position:relative;top:15px;left: 20px;">{{ solicitud.id_docente.nombre[0]  }}</label></div>
+              <label style="float: left;padding-left: 15px;">Docente: {{ solicitud.id_docente.nombre }}</label><br>
+              <label style="float: left;padding-left: 15px;">Tarea: {{ solicitud.id_tarea.nombre }}</label>
+            </div>
+            <label style="float: right;padding-left: 15px;"><button ng-click="habilitar( solicitud.id_tarea.idtareas , solicitud.id_docente.idprofesores )">Habilitar</button></label>
           </ion-item>
         </ion-list>
   

@@ -53,10 +53,10 @@
 
         <ion-item style="height: 30px;background: transparent;border: 0px;"></ion-item>
         <h4>Solución</h4> 
-        <p>{{ tarea[4].archivosestudiante }}</p>
+        <p>{{ tarea[4].solucion.notificacion }}</p>
         <div style="float: left;padding-right: 10px;background: transparent;border:1px solid white;padding: 20px;width: 100%;">
             <h4>Adjuntos de docente</h4> 
-          <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[4].archivosestudiante track by $index">
+          <div style="float: left;padding: 10px;" ng-repeat="doc in tarea[5].archivosdocente track by $index">
             <a ng-click="download( doc.url );">
               <img src="{{ doc.url }}" style="margin: 8px; width: 100px;height: 150px;-webkit-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); -moz-box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75); box-shadow: 2px -2px 46px -6px rgba(0,0,0,0.75);" >
             </a>
