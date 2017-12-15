@@ -70,7 +70,7 @@
           <ion-list style="width: 110%;position:absolute;left: -15px;">
             <ion-item style="background: transparent;border:0px;width: 100%;">
             </ion-item>
-            <ion-item ng-click="go_info_estudiante()" style="background: transparent;border:0px;width: 100%;">
+            <div ng-click="go_info_estudiante()" style="background: transparent;border:0px;width: 100%;">
                 <!-- imgenes de muestra informativa -->
                 <!--galeria de imagenes informativas Boostrap-->
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -89,7 +89,7 @@
       
                         <div class="item active" ng-if="item.show == 'true' " ng-click="pass( item.id );" style="background: white;">
                           <img style="width: 70px;padding: 5px;padding-right: 20px;" src="{{ item.img }}" alt="Chania">
-                          <h3 style="color:#207ce5">{{ item.titulo }}<br><small style="color:white;">{{ item.texto }}</small></h3><br>
+                          <h3 style="color:#207ce5">{{ item.titulo }}<br><small style="color:black;">{{ item.texto }}</small></h3><br>
                         </div>
       
                         <div ng-if="item.show == 'false' "></div>
@@ -98,7 +98,7 @@
                 </div>
       
       
-            </ion-item>
+            </div>
             <ion-item style="background: transparent;border:0px;width: 100%;">
               </ion-item>
             <ion-item ng-click="goregistro()" style="background: #ffffff;border:0px;width: 100%;opacity: 0.8;">

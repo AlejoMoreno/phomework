@@ -8,19 +8,19 @@
     <ion-list ng-repeat="historial in historiales">
           
         <div ng-if="historial.vs[0] == message.sender ">
-            <ion-item class="item-avatar" id="chat-list-item25" style="float: right;width: 100%;">
-                <label>{{ message.sender }}</label>
+            <div class="sender" id="chat-list-item25">
+                <label>{{ historial.vs[0] }}</label>
                 <p>{{ historial.mensaje }}</p>
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
-              </ion-item>
+              </div>
         </div>
 
         <div ng-if="historial.vs[0] != message.sender ">
-            <ion-item class="item-avatar" id="chat-list-item25" style="float: left;width: 100%;opacity: 0.8;">
-                <label>{{ message.receptor }}</label>
+            <div class="receptor" id="chat-list-item25">
+                <label>{{ historial.vs[0] }}</label>
                 <p>{{ historial.mensaje }}</p>
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
-              </ion-item>
+              </div>
         </div>
 
         
@@ -46,5 +46,29 @@
     .top-container{
         height: calc(100% - 96px);
         overflow:scroll;
+    }
+    .receptor{
+        color: black;
+        float: left;
+        width: 51%;
+        border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+background: #ededed;
+margin: 10px;
+padding: 20px;
+    }
+    .sender{
+        color: black;
+        float: right;
+        width: 51%;
+        border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+background: #93cede;
+margin: 10px;
+padding: 20px;
     }
   </style>

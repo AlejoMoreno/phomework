@@ -63,20 +63,20 @@ angular.module('app.controllers', [])
                 {
                     "id":1,
                     "titulo":"Mejorar tu rendimiento académico",
-                    "texto":"de la mano de profes expertos",
+                    "texto":"de la mano de expertos",
                     "img":"http://www.flaticon.com/premium-icon/icons/svg/124/124772.svg",
                     "show":"false"
                 },
                 {
                     "id":2,
-                    "titulo":"Solicita ayuda con tus tareas en esta plataforma",
-                    "texto":"",
+                    "titulo":"Solicita ayuda ",
+                    "texto":"con tus tareas en esta plataforma",
                     "img":"https://image.flaticon.com/icons/svg/265/265714.svg",
                     "show":"false"
                 },
                 {
                     "id":3,
-                    "titulo":"Mantén tu cuenta recargada para que uses la App",
+                    "titulo":"Recarga tu cuenta",
                     "texto":"donde y cuando más la necesites",
                     "img":"https://image.flaticon.com/icons/svg/181/181374.svg",
                     "show":"false"
@@ -129,15 +129,15 @@ angular.module('app.controllers', [])
                 },
                 {
                     "id":1,
-                    "titulo":"Apoyar a estudiantes en su proceso académico",
-                    "texto":"",
+                    "titulo":"Apoyar a estudiantes ",
+                    "texto":"en su proceso académico",
                     "img":"https://image.flaticon.com/icons/svg/187/187624.svg",
                     "show":"false"
                 },
                 {
                     "id":2,
-                    "titulo":"Resuelve dudas, brinda asesoría y ayuda con tareas",
-                    "texto":"",
+                    "titulo":"Resuelve dudas, ",
+                    "texto":"brinda asesoría y ayuda con tareas",
                     "img":"https://image.flaticon.com/icons/svg/138/138280.svg",
                     "show":"false"
                 },
@@ -483,10 +483,10 @@ angular.module('app.controllers', [])
         }])
 
         
-    .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -554,12 +554,16 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
         }])
         
-    .controller('mistareasdocenteCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistareasdocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -626,12 +630,16 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
         }])
 
-    .controller('tareasxsolCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareasxsolCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -699,12 +707,16 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
         }])
 
-    .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -800,12 +812,16 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
         }])
 
-    .controller('tareaiddocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareaiddocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -886,6 +902,10 @@ angular.module('app.controllers', [])
                 }, function (err) {
                     console.log(err);
                 });
+
+                $ionicPlatform.registerBackButtonAction(function () {
+                    $ionicHistory.goBack();
+                }, 100);
                 
             };
 
@@ -998,8 +1018,7 @@ angular.module('app.controllers', [])
                 }, function (err) {
                     console.log(err);
                 });
-            };
-            
+            };            
         }
 
     ])
@@ -1079,17 +1098,16 @@ angular.module('app.controllers', [])
                 }, function (err) {
                     console.log(err);
                 });
-            };
-            
+            };            
             
         }
 
     ])
 
-    .controller('notificacionesCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('notificacionesCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicLoading) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform, $ionicHistory) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -1148,6 +1166,10 @@ angular.module('app.controllers', [])
             }, function (err) {
                 console.log(err);
             });
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
             
             
         }
@@ -1844,10 +1866,10 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('subirtareaCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('subirtareaCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia, $ionicHistory) {
 
             $scope.form = {
                 'titulo': '',
@@ -1880,14 +1902,18 @@ angular.module('app.controllers', [])
                 $state.go('escanear',$scope.form);
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
 
         }])
 
-    .controller('solucionarCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('solucionarCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$cordovaMedia', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia) {
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $cordovaMedia, $ionicHistory) {
 
             $scope.form = {
                 'idtarea' : $stateParams.idtarea,
@@ -1918,6 +1944,10 @@ angular.module('app.controllers', [])
                 $state.go('escannersolucion',$scope.form);
             };
 
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
             /*DEBE IR CODIGO DE SCANEER PARA TOMAR FOTO Y PODER SUBIRLA*/ 
 
         }])
@@ -1930,10 +1960,10 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('preguntasFrecuentesCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('preguntasFrecuentesCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
             $scope.form = {
                 'comentario':'',
                 'id':0,
@@ -1961,6 +1991,10 @@ angular.module('app.controllers', [])
                     console.log(err);
                 });
             };
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
         }])
 
     .controller('enviarMensajeCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -1977,7 +2011,7 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('chatCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('chatCtrl', ['$scope', '$stateParams', '$http', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
@@ -1990,6 +2024,7 @@ angular.module('app.controllers', [])
                 'state': 'ENVIADO',
                 'tipo': localStorage.getItem("tipo"),
                 'sender': localStorage.getItem("id"),
+                'vs': localStorage.getItem("id")+'-'+$stateParams.receptor,
                 'receptor': $stateParams.receptor, //id administrador
                 'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
             };
@@ -2047,7 +2082,8 @@ angular.module('app.controllers', [])
                                 idchat : result.data.body[i-1].idchat,
                                 idestudiante :  result.data.body[i-1].idestudiante,
                                 idprofesor : result.data.body[i-1].idprofesor,
-                                mensaje : result.data.body[i-1].mensaje
+                                mensaje : result.data.body[i-1].mensaje,
+                                vs : result.data.body[i-1].vs
                             }
                         );
                         console.log(result.data.body[i-1]);
