@@ -21,17 +21,27 @@
               -moz-border-radius: 200px 200px 200px 200px;
               -webkit-border-radius: 200px 200px 200px 200px;
               border: 0px solid #000000; width: 50px;height: 50px;background: black;color: white;">
-              <label style="position:relative;top:15px;left: 20px;">{{ solicitud.id_docente.nombre[0]  }}</label></div>
-              <label style="float: left;padding-left: 15px;">Docente: {{ solicitud.id_docente.nombre }}</label><br>
-              <label style="float: left;padding-left: 15px;">Tarea: {{ solicitud.id_tarea.nombre }}</label>
+              <label style="position:relative;top:15px;left: 20px;">{{ solicitud.id_docente.idprofesores  }}</label>
+              </div>
+              <label style="float: left;padding-left: 15px;color:black">Docente: {{ solicitud.id_docente.nombre }}</label><br>
+              <label style="float: left;padding-left: 15px;color:black">Tarea: {{ solicitud.id_tarea.nombre }}</label>
+              <label style="float: right;padding-left: 15px;font-size: 50px;margin-top: -20px;color:black">
+                  <div  class="ion-chatbubble-working"></div>
+                </label><br><br>
             </div>
-            <label style="float: right;padding-left: 15px;"><button ng-click="habilitar( solicitud.id_tarea.idtareas , solicitud.id_docente.idprofesores )">Habilitar</button></label>
+              
+              <label ng-click="habilitar( solicitud.id_tarea.idtareas , solicitud.id_docente.idprofesores )"  style="float: left;padding-left: 15px;width: 100%;padding-right: 15px;">
+                <div style="width: 100%;padding:10px;color:white; background: #207ce5;-webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);
+                -moz-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);
+                box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);"><strong style="color:white">Quiero que {{ solicitud.id_docente.nombre }} solucione mi tarea</strong></div>
+              </label>
+            </div>
           </ion-item>
         </ion-list>
   
   <style>
   #body1{
-    background-image: url('http://phomework.com.co/www/image/fondo5.jpg');
+    background-image: url('img/fondo5.jpg');
     filter: blur(0px);
   }
   h1,h2,h3{

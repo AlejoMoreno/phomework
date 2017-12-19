@@ -191,11 +191,20 @@ angular.module('app.controllers', [])
             };
 
             $scope.save = function(){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
                 $http({
                     url: host + 'registroestudiante.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     if(result.data.result == 'true'){
                         alert('bienvenido '+result.data.body.correo );
@@ -215,7 +224,9 @@ angular.module('app.controllers', [])
                     }
                     
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
+                    alert(err);
                 });
             };
 
@@ -267,11 +278,21 @@ angular.module('app.controllers', [])
             //FIN consultar area especialista========
 
             $scope.save = function(){
+
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
                 $http({
                     url: host + 'registrodocente.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     if(result.data.result == 'true'){
                         alert('bienvenido' + result.data.body.correo);
@@ -290,7 +311,9 @@ angular.module('app.controllers', [])
                     }
                     
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
+                    alert(err);
                 });
             };
 
@@ -300,10 +323,10 @@ angular.module('app.controllers', [])
             
         }])
 
-    .controller('loginallCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('loginallCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading) {
 
             //check login
             if(localStorage.getItem('tipo') == 'estudiante' && localStorage.getItem('id') != ''){
@@ -321,11 +344,21 @@ angular.module('app.controllers', [])
             };
 
             $scope.login = function () {
+
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+                
                 $http({
                     url: host + 'login.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     if(result.data.body.error == null){
                         alert('bienvenido '+result.data.body.correo);
@@ -348,7 +381,9 @@ angular.module('app.controllers', [])
                     }
                     //alert('Bienvenido');
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
+                    alert(err);
                 });
             };
 
@@ -483,10 +518,10 @@ angular.module('app.controllers', [])
         }])
 
         
-    .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistareasCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -529,6 +564,14 @@ angular.module('app.controllers', [])
                     $state.go("menu.miperfildocente");
                 }
             };
+
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             //consultar area especialista========
             $http({
                 url: host + 'consultas/consultarTareas.php',
@@ -538,11 +581,13 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.tareas = result.data.body; 
                 console.log("Tareas en espera"); 
                 console.log(result.data.body);          
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
             //FIN consultar area especialista========
@@ -560,10 +605,10 @@ angular.module('app.controllers', [])
 
         }])
         
-    .controller('mistareasdocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('mistareasdocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -607,6 +652,14 @@ angular.module('app.controllers', [])
                 }
             };
 
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+
             $http({
                 url: host + 'consultas/consultarTareas.php',
                 method: "POST",
@@ -615,11 +668,13 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.tareas = result.data.body; 
                 console.log("Tareas en espera"); 
                 console.log(result.data.body);          
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
 
@@ -636,10 +691,10 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('tareasxsolCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareasxsolCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -682,6 +737,14 @@ angular.module('app.controllers', [])
                     $state.go("menu.miperfildocente");
                 }
             };
+
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             //consultar area especialista========
             $http({
                 url: host + 'consultas/consultarTareas.php',
@@ -691,11 +754,13 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.tareas = result.data.body; 
                 console.log("Tareas en espera"); 
                 console.log(result.data.body);          
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
             //FIN consultar area especialista========
@@ -713,10 +778,10 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareaidCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -762,6 +827,13 @@ angular.module('app.controllers', [])
 
             console.log('Datos request tareaID...');
             console.log($stateParams);
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             //consultar todos los datos de la tarea
             $http({
                 url: host + 'consultas/consultarTareaIdestudiante.php',
@@ -773,9 +845,11 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.tarea = result.data.body;
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
 
@@ -818,10 +892,10 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('tareaiddocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('tareaiddocenteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -867,6 +941,13 @@ angular.module('app.controllers', [])
 
             console.log('Datos request tareaID...');
             console.log($stateParams);
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             //consultar todos los datos de la tarea
             $http({
                 url: host + 'consultas/consultarTareaIdestudiante.php',
@@ -878,13 +959,22 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.tarea = result.data.body;
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
 
             $scope.go_descubre = function(id){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'solicitud.php',
                     method: "POST",
@@ -895,17 +985,15 @@ angular.module('app.controllers', [])
                         'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                     }
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     $state.go('menu.chat',{
                         receptor: id
                     });
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
-
-                $ionicPlatform.registerBackButtonAction(function () {
-                    $ionicHistory.goBack();
-                }, 100);
                 
             };
 
@@ -924,6 +1012,13 @@ angular.module('app.controllers', [])
                 'valor':''
             };
             $scope.calificar = function(tarea){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'calificacion.php',
                     method: "POST",
@@ -935,9 +1030,11 @@ angular.module('app.controllers', [])
                         'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                     }
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     alert('Guardado exitoso');
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
             };
@@ -999,11 +1096,19 @@ angular.module('app.controllers', [])
             };
             
             $scope.save = function(){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'updateestudiante.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     if(result.data.result == 'true'){
                         alert('Cambio correcto');
@@ -1016,6 +1121,7 @@ angular.module('app.controllers', [])
                         console.log(result.data.body);
                     }
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
             };            
@@ -1079,11 +1185,19 @@ angular.module('app.controllers', [])
             };
             
             $scope.save = function(){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'updatedocente.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     if(result.data.result == 'true'){
                         alert('Cambio correcto');
@@ -1096,6 +1210,7 @@ angular.module('app.controllers', [])
                         console.log(result.data.body);
                     }
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
             };            
@@ -1104,10 +1219,10 @@ angular.module('app.controllers', [])
 
     ])
 
-    .controller('notificacionesCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('notificacionesCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform', '$ionicHistory', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform, $ionicHistory) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform, $ionicHistory, $ionicLoading) {
 
             $scope.go_cerrar = function(){
                 var r = confirm("Desea salir?");
@@ -1151,6 +1266,13 @@ angular.module('app.controllers', [])
                 }
             };
 
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             $http({
                 url: host + 'consultas/consultarNotificacion.php',
                 method: "POST",
@@ -1160,10 +1282,12 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log('Notificaciones ....');
                 console.log(result);
                 $scope.notificaciones = result.data.body;
             }, function (err) {
+                $ionicLoading.hide();
                 console.log(err);
             });
 
@@ -1226,6 +1350,24 @@ angular.module('app.controllers', [])
 
 
             $scope.go_chat = function(id){
+                //envio de notificacion
+                $http({
+                    url: host + 'solicitud1.php',
+                    method: "POST",
+                    data: {                        
+                        'id_tarea': $stateParams.idtareas,
+                        'tipo' : localStorage.getItem('tipo'),
+                        'id_docente' : id,
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                    }
+                }).then(function (result) {
+                    console.log(result);
+                    $state.go('menu.chat',{
+                        receptor: id
+                    });
+                }, function (err) {
+                    console.log(err);
+                });
                 console.log('seleccionado al chat '+ id);
                 $state.go('menu.chat',{
                     receptor : id
@@ -1254,21 +1396,24 @@ angular.module('app.controllers', [])
 
             $scope.habilitar = function(tarea,docente){
                 console.log(tarea + " " + docente);
-                $http({
-                    url: host + 'asignar.php',
-                    method: "POST",
-                    data: {
-                        "tarea" : tarea,
-                        "docente" : docente,
-                        "id" : $stateParams.idtareas,
-                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
-                    }
-                }).then(function (result) {
-                    console.log(result);
-                    alert("Docente asignado correctamente");
-                }, function (err) {
-                    console.log(err);
-                });
+                var r = confirm("Esta de acuerdo en asignar la tarea al docente?");
+                if (r == true) {
+                    $http({
+                        url: host + 'asignar.php',
+                        method: "POST",
+                        data: {
+                            "tarea" : tarea,
+                            "docente" : docente,
+                            "id" : $stateParams.idtareas,
+                            'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+                        }
+                    }).then(function (result) {
+                        console.log(result);
+                        alert("Docente asignado correctamente");
+                    }, function (err) {
+                        console.log(err);
+                    });
+                }  
             };
 
         }
@@ -1322,6 +1467,13 @@ angular.module('app.controllers', [])
                 }
             };
 
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             $http({
                 url: host + 'consultas/consultarTokens.php',
                 method: "POST",
@@ -1349,6 +1501,7 @@ angular.module('app.controllers', [])
                     'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
                 }
             }).then(function (result) {
+                $ionicLoading.hide();
                 console.log(result);
                 $scope.historial = result.data.body;
             }, function (err) {
@@ -1884,16 +2037,25 @@ angular.module('app.controllers', [])
             }
             
             $scope.guardar = function(){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'registrotarea.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     $state.transitionTo('menu.estudiante_panel', {
                         "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
             };
@@ -1925,17 +2087,26 @@ angular.module('app.controllers', [])
             }
             
             $scope.guardar = function(){
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
                 $http({
                     url: host + 'registrosolucion.php',
                     method: "POST",
                     data: $scope.form
                 }).then(function (result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     alert('Solucion guardada con exito');
                     $state.transitionTo('menu.docente_panel', {
                         "PHOMEWORK_cliente": localStorage.getItem('id')
                     }, {reload: true, notify:true});
                 }, function (err) {
+                    $ionicLoading.hide();
                     console.log(err);
                 });
             };
@@ -1964,6 +2135,49 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state, $ionicPlatform, $ionicHistory) {
+            
+            $scope.go_cerrar = function(){
+                var r = confirm("Desea salir?");
+                if (r == true) {
+                    //cerrar sesion 
+                    localStorage.setItem("clave", '');
+                    localStorage.setItem("correo", '');
+                    localStorage.setItem("id", '');
+                    localStorage.setItem("tipo", '');
+                    $state.go('menu.inicioDeSesiN');
+                } else {
+                    if(localStorage.getItem('tipo') == 'estudiante'){
+                        $state.go("menu.estudiante_panel");
+                    }
+                    else{
+                        $state.go("menu.docente_panel");
+                    } 
+                }
+                
+            };
+            $scope.go_panel = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.estudiante_panel");
+                }
+                else{
+                    $state.go("menu.docente_panel");
+                } 
+            };
+            $scope.go_fqs = function(){
+                $state.go('menu.preguntasFrecuentes');
+            };
+            $scope.go_misnotificaciones = function(){
+                $state.go('menu.notificaciones');
+            };
+            $scope.go_miperfil = function(){
+                if(localStorage.getItem('tipo') == 'estudiante'){
+                    $state.go("menu.miperfilestudiante");
+                }
+                else{
+                    $state.go("menu.miperfildocente");
+                }
+            };
+
             $scope.form = {
                 'comentario':'',
                 'id':0,
@@ -2015,6 +2229,7 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams, $http, $state) {
+            
 
             var fila = 0;
             $scope.historiales = [];

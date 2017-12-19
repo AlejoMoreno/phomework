@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.phomework;
+package com.phomeworkapp.waku.phomework;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

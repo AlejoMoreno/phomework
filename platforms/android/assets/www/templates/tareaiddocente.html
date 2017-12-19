@@ -24,6 +24,12 @@
                 {{ tarea[2].texto }}</center>
             </div>
         </div>
+        <div ng-if=" tarea[2].texto == 'Espera a que el estudiante habilite la tarea' ">
+            <div style="background: transparent;border: 1px solid #0c60ee;padding: 20px;">
+                <center><img width="30" src="{{ tarea[2].img }}"> 
+                {{ tarea[2].texto }}</center>
+            </div>
+        </div>
         <div ng-if=" tarea[0].tarea.estado == 'SOLUCIONADO' ">
             <div style="background: transparent;border: 1px solid #0c60ee;padding: 20px;">
                 <center><img width="30" src="{{ tarea[2].img }}"> 

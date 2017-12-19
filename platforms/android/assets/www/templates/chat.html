@@ -3,13 +3,14 @@
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
     </ion-nav-title-->
+    
   <ion-content padding="true" class="top-container" id="body1" style="float:left;padding: 20px;padding-top: 100px;"  scroll-glue>
       
     <ion-list ng-repeat="historial in historiales">
           
         <div ng-if="historial.vs[0] == message.sender ">
             <div class="sender" id="chat-list-item25">
-                <label>{{ historial.vs[0] }}</label>
+                <label>Yo:{{ historial.vs[0] }}</label>
                 <p>{{ historial.mensaje }}</p>
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
               </div>
@@ -17,7 +18,7 @@
 
         <div ng-if="historial.vs[0] != message.sender ">
             <div class="receptor" id="chat-list-item25">
-                <label>{{ historial.vs[0] }}</label>
+                <label>Receptor:{{ historial.vs[0] }}</label>
                 <p>{{ historial.mensaje }}</p>
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
               </div>
