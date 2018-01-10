@@ -174,10 +174,10 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('registroEstudianteCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('registroEstudianteCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading) {
             
             $scope.form = {
                 'nickname'  :    'null',
@@ -295,15 +295,10 @@ angular.module('app.controllers', [])
                     $ionicLoading.hide();
                     console.log(result);
                     if(result.data.result == 'true'){
-                        alert('bienvenido' + result.data.body.correo);
-                        localStorage.setItem("clave", result.data.body.clave);
-                        localStorage.setItem("correo", result.data.body.correo);
-                        localStorage.setItem("id", result.data.body.idprofesores);
-                        localStorage.setItem("nombre", result.data.body.nombre);
-                        localStorage.setItem("telefono", result.data.body.telefono);
-                        localStorage.setItem("device", result.data.body.tipo);
-                        localStorage.setItem("tipo", 'docente');
-                        $state.go('menu.docente_panel');
+                        alert('Tome fotos a los certificados necesarios para poder ser docente en phomework');
+                        $state.go('escanearcertificado', {
+                            'id':result.data.body.idprofesores
+                        });
                     }
                     else{
                         alert('Vuelve a intentar');
@@ -384,6 +379,58 @@ angular.module('app.controllers', [])
                     $ionicLoading.hide();
                     console.log(err);
                     alert(err);
+                });
+            };
+
+            $scope.olvido = function(){
+                $state.go('olvido');
+            };
+
+
+        }])
+
+.controller('olvidoCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+        function ($scope, $stateParams, $http, $state, $ionicLoading) {
+
+            $scope.form = {
+                'correo': '',
+                'token' : localStorage.getItem('device_token'),
+                'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af' //phomework-wakusoft in md5
+            };
+
+            $scope.login = function () {
+
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+                
+                $http({
+                    url: host + 'olvido.php',
+                    method: "POST",
+                    data: $scope.form
+                }).then(function (result) {
+                    $ionicLoading.hide();
+                    console.log(result);
+                    if(result.data.body.error == null){
+                        alert('Te hemos enviado la clave al correo. Verifica');
+                        $state.go('loginall');                        
+                    }
+                    else{
+                        alert('No existe este correo');
+                        console.log(result.data.body.error);
+                    }
+                    //alert('Bienvenido');
+                }, function (err) {
+                    $ionicLoading.hide();
+                    console.log(err);
+                    alert('Te hemos enviado la clave al correo. Verifica');
+                    $state.go('loginall'); 
                 });
             };
 
@@ -1515,6 +1562,262 @@ angular.module('app.controllers', [])
 
         }
 
+
+    ])
+
+.controller('escanearcertificadoCtrl', ['$scope', '$stateParams', '$cordovaCamera', '$cordovaActionSheet', '$http', '$state', '$ionicPlatform', '$ionicLoading', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+
+        function ($scope, $stateParams, $cordovaCamera, $cordovaActionSheet, $http, $state, $ionicPlatform, $ionicLoading, $ionicHistory ) {
+
+            $scope.inicio = $stateParams;
+            $scope.file = {
+                'file': '',
+                'host': host,
+                'cont': 0
+            };
+            console.log($scope.reclamo);
+            $scope.respuesta = {
+                'ms': 'Respuesta',
+                'foto': ""
+            }
+
+            $scope.delete = function (document) {
+                var r = confirm("Se eliminara esta foto. Esta de acuerdo?");
+                if (r == true) {
+                    // Setup the loader
+                    $ionicLoading.show({
+                        content: 'Loading',
+                        animation: 'fade-in',
+                        showBackdrop: true,
+                        maxWidth: 200,
+                        showDelay: 0
+                    });
+                    $http({
+                        url: host + '/documentsmodel/delete/' + document,
+                        method: "GET"
+                    }).then(function (result) {
+                        console.log(result);
+                        alert(result.data.Message);
+                        //$state.go('escanear', $scope.reclamo);
+                        $ionicLoading.hide();
+                        $state.transitionTo('escanear', $scope.reclamo, {reload: true, notify:true});
+                    }, function (err) {
+                        console.log(err);
+                        $ionicLoading.hide();
+                    });
+                }                
+            };
+
+            $scope.folderFile = function(){
+                var cameraOptions = {
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    destinationType: Camera.DestinationType.DATA_URL,      
+                    quality: 75,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    encodingType: Camera.EncodingType.JPEG,      
+                    correctOrientation: true
+                }; 
+                $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
+                    $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                    }  
+                }, function (err) {
+                    console.log(err);
+                });
+            };
+
+            $scope.takePicture = function () {
+                var options = {
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    allowEdit: false,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 300,
+                    targetHeight: 300,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+
+                };
+
+
+                $cordovaCamera.getPicture(options).then(function (imageData) {
+                    $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                    //$scope.saveimage($scope.imgURI);
+                    $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                    }  
+                }, function (err) {
+                    console.log(err);
+                });
+
+            };
+
+            $scope.data = {
+                'file': ''
+            };
+
+            $scope.send = function (scope, element, attributes) {
+                // element.bind("change", function (changeEvent) {
+                //     var reader = new FileReader();
+                //     reader.onload = function (loadEvent) {
+                //         scope.$apply(function () {
+                //             scope.fileread = loadEvent.target.result;
+                //         });
+                //     }
+                //     reader.readAsDataURL(changeEvent.target.files[0]);
+                // });
+                var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                if (r == true) {
+                    $scope.saveimage();
+                }                
+            };
+
+            $scope.saveimage = function () {
+                //var file = document.getElementById('sortpicture').value;
+                //var file_data = file.prop('files')[0];
+                //$scope.respuesta.ms = file_data;
+                //var file_data = file;
+                /*var form_data = new FormData();
+                form_data.append('file', file_data);
+                form_data.append('reclamo', $scope.reclamo.id_reclamo);
+                form_data.append('cliente', localStorage.getItem("CRAWFORD_cliente"));
+                form_data.append('listcheking', $scope.reclamo.listcheking);
+                form_data.append('FileType', 'camara');
+                form_data.append('redirect', 'crawford');*/
+
+                //
+                // var data = {
+                //     'file': $scope.data.file,
+                //     'reclamo': $scope.reclamo.id_reclamo,
+                //     'cliente': localStorage.getItem("CRAWFORD_cliente"),
+                //     'listcheking': $scope.reclamo.listcheking,
+                //     'FileType': 'camara',
+                //     'redirect': 'crawford'
+                // };
+
+                
+                if($scope.file.cont == 0){
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'TRUE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                    };
+                }
+                else{
+                    var data = {
+                        'titulo': $stateParams.titulo,
+                        'descripcion': $stateParams.descripcion,
+                        'fecha_vencimiento': $stateParams.fecha_vencimiento,
+                        'valor': $stateParams.valor,
+                        'id' : localStorage.getItem('id'),
+                        'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                        'token': localStorage.getItem('device'),
+                        'first':'FALSE',
+                        'last':'FALSE',
+                        'image_content': $scope.respuesta.foto,
+                        'idtareas': $scope.tareas.idtareas
+                    };
+                }
+
+                // Setup the loader
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
+                $http({
+                    url: host + 'Subir/Docentes.php',
+                    method: "POST",
+                    data: data
+                }).then(function (result) {
+                    console.log(result);
+                    $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
+                    $scope.file.cont = 1;
+                    //$state.transitionTo('escanear', $stateParams, {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+
+            };
+
+            $scope.go_checklist = function () {
+                // Setup the loader
+                $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                });
+
+                var data = {
+                    'id': $stateParams.id,
+                    'encrypt'   :    '453fe2d118fe6ea58f1e54f279d2b4af', //phomework-wakusoft in md5
+                    'token': localStorage.getItem('device'),
+                    'image_content': $scope.respuesta.foto
+                };
+
+                $http({
+                    url: host + 'Subir/Estudiantes.php',
+                    method: "POST",
+                    data: data
+                }).then(function (result) {
+                    console.log(result);
+                    alert('Debe esperar a que phomework habilite su cuenta, debe estar pendiente del correo que registro.');
+                    $ionicLoading.hide();
+                    $scope.tareas = result.data.body;
+                    $state.transitionTo('loginall', {reload: true, notify:true});
+                }, function (err) {
+                    console.log(err);
+                    $ionicLoading.hide();
+                });
+                
+            };
+
+            $scope.borrar = function () {
+                var options = {
+                    title: '¿Quieres borrar esta imagen?',
+                    buttonLabels: ['Repetir'],
+                    addCancelButtonWithLabel: 'Cancelar',
+                    androidEnableCancelButton: true,
+                    winphoneEnableCancelButton: true,
+                    addDestructiveButtonWithLabel: 'Borrarla'
+
+                };
+
+                $cordovaActionSheet.show(options).then(function (btnIndex) {
+                    var index = btnIndex;
+
+                }, false);
+
+            };
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
+
+        }
 
     ])
 

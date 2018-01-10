@@ -55,6 +55,12 @@ angular.module('app.routes', [])
                 controller: 'loginallCtrl'
             })
 
+            .state('olvido', {
+                url: '/olvido',
+                templateUrl: 'templates/olvido.html',
+                controller: 'olvidoCtrl'
+            })
+
             .state('menu.estudiante_panel', {
                 url: '/estudiante_panel',
                 params: {
@@ -189,6 +195,15 @@ angular.module('app.routes', [])
                         controller: 'mistokensCtrl'
                     }
                 }                 
+            })
+
+            .state('escanearcertificado', {
+                url: '/escanearcertificado',
+                params: {
+                    id:''
+                },
+                templateUrl: 'templates/escanearcertificado.html',
+                controller: 'escanearcertificadoCtrl'
             })
 
             .state('escanear', {

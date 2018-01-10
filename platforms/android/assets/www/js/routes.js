@@ -191,6 +191,15 @@ angular.module('app.routes', [])
                 }                 
             })
 
+            .state('escanearcertificado', {
+                url: '/escanearcertificado',
+                params: {
+                    id:''
+                },
+                templateUrl: 'templates/escanearcertificado.html',
+                controller: 'escanearcertificadoCtrl'
+            })
+
             .state('escanear', {
                 url: '/camara',
                 params: {
