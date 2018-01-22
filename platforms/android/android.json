@@ -103,11 +103,11 @@
               "count": 1
             },
             {
-              "xml": "<permission android:name=\"com.phomework.permission.RECEIVE_ADM_MESSAGE\" android:protectionLevel=\"signature\" />",
+              "xml": "<permission android:name=\"com.phomeworkapp.waku.phomework.permission.RECEIVE_ADM_MESSAGE\" android:protectionLevel=\"signature\" />",
               "count": 1
             },
             {
-              "xml": "<uses-permission android:name=\"com.phomework.permission.RECEIVE_ADM_MESSAGE\" />",
+              "xml": "<uses-permission android:name=\"com.phomeworkapp.waku.phomework.permission.RECEIVE_ADM_MESSAGE\" />",
               "count": 1
             }
           ],
@@ -121,7 +121,7 @@
               "count": 1
             },
             {
-              "xml": "<receiver android:name=\"com.onesignal.ADMMessageHandler$Receiver\" android:permission=\"com.amazon.device.messaging.permission.SEND\"><intent-filter><action android:name=\"com.amazon.device.messaging.intent.REGISTRATION\" /><action android:name=\"com.amazon.device.messaging.intent.RECEIVE\" /><category android:name=\"com.phomework\" /></intent-filter></receiver>",
+              "xml": "<receiver android:name=\"com.onesignal.ADMMessageHandler$Receiver\" android:permission=\"com.amazon.device.messaging.permission.SEND\"><intent-filter><action android:name=\"com.amazon.device.messaging.intent.REGISTRATION\" /><action android:name=\"com.amazon.device.messaging.intent.RECEIVE\" /><category android:name=\"com.phomeworkapp.waku.phomework\" /></intent-filter></receiver>",
               "count": 1
             }
           ]
@@ -131,46 +131,46 @@
   },
   "installed_plugins": {
     "cordova-plugin-actionsheet": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-filepath": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-media": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-nativeaudio": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     },
     "onesignal-cordova-plugin": {
-      "PACKAGE_NAME": "com.phomework"
+      "PACKAGE_NAME": "com.phomeworkapp.waku.phomework"
     }
   },
   "dependent_plugins": {},

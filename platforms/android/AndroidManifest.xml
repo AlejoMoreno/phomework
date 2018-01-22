@@ -18,7 +18,7 @@
             <intent-filter>
                 <action android:name="com.amazon.device.messaging.intent.REGISTRATION" />
                 <action android:name="com.amazon.device.messaging.intent.RECEIVE" />
-                <category android:name="com.phomework" />
+                <category android:name="com.phomeworkapp.waku.phomework" />
             </intent-filter>
         </receiver>
     </application>
@@ -29,6 +29,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
-    <permission android:name="com.phomework.permission.RECEIVE_ADM_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.phomework.permission.RECEIVE_ADM_MESSAGE" />
+    <permission android:name="com.phomeworkapp.waku.phomework.permission.RECEIVE_ADM_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.phomeworkapp.waku.phomework.permission.RECEIVE_ADM_MESSAGE" />
 </manifest>

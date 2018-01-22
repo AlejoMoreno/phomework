@@ -55,6 +55,12 @@ angular.module('app.routes', [])
                 controller: 'loginallCtrl'
             })
 
+            .state('olvido', {
+                url: '/olvido',
+                templateUrl: 'templates/olvido.html',
+                controller: 'olvidoCtrl'
+            })
+
             .state('menu.estudiante_panel', {
                 url: '/estudiante_panel',
                 params: {
