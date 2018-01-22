@@ -1,9 +1,21 @@
 <ion-view title="Chat" hide-back-button="true" cache-view="false" id="page5">
     <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
+    <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
     <!--ion-nav-title>
       <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
     </ion-nav-title-->
-    
+    <ion-content padding="true" id="body1" style="position: absolute; padding: 20px;padding-top: 100px;height:50px;z-index:1000;" >
+
+      <div class="bar-positive" style="position: absolute;left: -20px;top:-100px;width: 120%;padding:5px;border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);">
+        <img ng-click="go_panel()" style="width: 30px;float: left;padding-top:5px; " src="http://phomework.com.co/www/image/phome-ico.png">
+        
+      </div>
+        <style>
+          .bar-positive{
+            border: 0px;
+          }
+        </style>
+    </ion-content>
   <ion-content padding="true" class="top-container" id="body1" style="float:left;padding: 20px;padding-top: 100px;"  scroll-glue>
       
     <ion-list ng-repeat="historial in historiales">
@@ -18,7 +30,7 @@
 
         <div ng-if="historial.vs[0] != message.sender ">
             <div class="receptor" id="chat-list-item25">
-                <label>Receptor:{{ historial.vs[0] }}</label>
+                <label>id:{{ historial.vs[0] }}</label>
                 <p>{{ historial.mensaje }}</p>
                 <small style="font-size:9px;">{{ historial.estado }} {{ historial.fecha }} </small>
               </div>
