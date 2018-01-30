@@ -1790,7 +1790,7 @@ angular.module('app.controllers', [])
                 };
 
                 $http({
-                    url: host + 'Subir/Estudiantes.php',
+                    url: host + 'Subir/Docentes.php',
                     method: "POST",
                     data: data
                 }).then(function (result) {
