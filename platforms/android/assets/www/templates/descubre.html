@@ -17,14 +17,7 @@
         <ion-list style="border:0px;" ng-repeat="solicitud in solicitudes track by $index">
           <ion-item  style="border: 0px;background: white;opacity: 0.8;">
             <div ng-click="go_chat( solicitud.id_docente.idprofesores );">
-              <div style="float: left; border-radius: 200px 200px 200px 200px;
-              -moz-border-radius: 200px 200px 200px 200px;
-              -webkit-border-radius: 200px 200px 200px 200px;
-              border: 0px solid #000000; width: 50px;height: 50px;background: black;color: white;">
-              <label style="position:relative;top:15px;left: 20px;">{{ solicitud.id_docente.idprofesores  }}</label>
-              </div>
-              <label style="float: left;padding-left: 15px;color:black">Tarea: {{ solicitud.id_tarea.nombre }}</label>
-              <label style="float: left;padding-left: 15px;color:black">Póngase de acuerdo con el profe {{ solicitud.id_docente.idprofesores }} <br> por aquí antes de
+              <label style="float: left;padding-left: 15px;color:black">Póngase en contacto con el profe {{ solicitud.id_docente.idprofesores }} <br> por aquí antes de
                 habilitarlo </label>
               <label style="float: right;padding-left: 15px;font-size: 50px;margin-top: -20px;color:black">
                   <div  class="ion-chatbubble-working"></div>

@@ -26,32 +26,39 @@
           }
         </style>
 
-        <ion-item style="background:transparent;border:0px;width: 45%;opacity: 0.8; float: left;">
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: right;">
+            Identificador Docente: {{ identificador.id }}<br>
+            Correo Docente: {{ identificador.correo }}
+        </ion-item>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8; float: left;">
             <a ng-click="go_mistareas()" style="padding:10px;">
-                <img width="120" src="img/treasure.png"><br><center>Mis Tareas Vistas<br>ó Solucionadas</center>
+                <img width="120" src="img/treasure.png" style="float: left;margin-right:10%"><label><br><br>Mis tareas vistas o <br> solucionadas</label>
             </a> 
         </ion-item>
 
-        <ion-item style="background:transparent;border:0px;width: 45%;opacity: 0.8;float: right;">
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: left;">
             <a ng-click="go_tareasxsol()" style="padding:10px;">
-                <img width="120" src="img/tarea.png"><br><center>Tareas por solucionar</center>
+                <img width="120" src="img/tarea.png" style="float: left;margin-right:10%"><label><br><br>Tareas por solucionar</label>
+            </a>
+        </ion-item>
+        
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: left;">
+            <a ng-click="go_chatsoporte()" style="padding:10px;">
+                <img width="120" src="img/pregunta.png" style="float: left;margin-right:10%"><label><br><br>Soporte técnico</label>
             </a>
         </ion-item>
 
-        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: left;">       
-        </ion-item>
-        
-        <ion-item style="background:transparent;border:0px;width: 45%;opacity: 0.8;float: right;">
-            <a ng-click="go_chatsoporte()" style="padding:10px;">
-                <img width="120" src="img/pregunta.png"><br><center>Soporte Técnico</center>
-            </a>
-        </ion-item>
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: right;height: 200px;"></ion-item>
   
   
   <style>
   #body1{
     background-image: url('img/fondo5.jpg');
     filter: blur(0px);
+  }
+  label{
+      color:black;
   }
   
   h1,h2,h3{

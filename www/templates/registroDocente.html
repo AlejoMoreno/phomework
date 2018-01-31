@@ -107,6 +107,12 @@
           <textarea style="height: 100px;" type="text" placeholder="Escriba porque phomework debe habilitarlo como docente" ng-model="form.descripcion"></textarea>
         </label>
 
+        <label class="item item-input" id="nuevoReclamo13-input27">
+            <span class="input-label">
+            <ion-checkbox ng-model="condiciones" ng-click="updatecondiciones()">Acepta términos y condiciones</ion-checkbox>
+          </span>
+        </label>
+
         <ion-item style="background:transparent;border:0px;width: 100%;"></ion-item>
         <ion-item ng-click="save();" style="background:#53ad1b;border:1px solid #53ad1b;width: 100%;">
           <div class="panel-body" style="text-align: center;"><h2 style="color:white">Registrar en Phomework</h2></div>

@@ -230,6 +230,10 @@ angular.module('app.controllers', [])
                 });
             };
 
+            $scope.updatecondiciones = function(){
+                window.open('http://phomework.com.co/www/condicionesestudiante.php','_system');
+            };
+
 
 
             $scope.gologin = function(){
@@ -310,6 +314,10 @@ angular.module('app.controllers', [])
                     console.log(err);
                     alert(err);
                 });
+            };
+
+            $scope.updatecondiciones = function(){
+                window.open('http://phomework.com.co/www/condiciones.php','_system');
             };
 
             $scope.gologin = function(){
@@ -484,6 +492,11 @@ angular.module('app.controllers', [])
                 }
             };
 
+            $scope.identificador = {
+                'id' : localStorage.getItem('id'),
+                'correo' : localStorage.getItem('correo')
+            };
+
 
             //check login
             if(localStorage.getItem('id') == ''){
@@ -553,6 +566,11 @@ angular.module('app.controllers', [])
                 else{
                     $state.go("menu.miperfildocente");
                 }
+            };
+
+            $scope.identificador = {
+                'id' : localStorage.getItem('id'),
+                'correo' : localStorage.getItem('correo')
             };
 
             //check login
@@ -1790,7 +1808,7 @@ angular.module('app.controllers', [])
                 };
 
                 $http({
-                    url: host + 'Subir/Estudiantes.php',
+                    url: host + 'Subir/Docentes.php',
                     method: "POST",
                     data: data
                 }).then(function (result) {
@@ -2539,11 +2557,15 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('chatCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('chatCtrl', ['$scope', '$stateParams', '$http', '$state', '$ionicLoading', '$ionicPlatform', '$ionicHistory',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams, $http, $state, $ionicLoading) {
+        function ($scope, $stateParams, $http, $state, $ionicLoading, $ionicPlatform, $ionicHistory) {
             
+
+            $ionicPlatform.registerBackButtonAction(function () {
+                $ionicHistory.goBack();
+            }, 100);
 
             $ionicLoading.hide();
             $scope.go_cerrar = function(){
