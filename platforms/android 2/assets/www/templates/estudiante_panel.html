@@ -1,0 +1,85 @@
+<ion-view title="Estudiante Panel" hide-back-button="true" cache-view="false" nav-transition="none" id="page4">
+    <ion-nav-bar class="bar bar-header bar-positive"></ion-nav-bar>
+    <!--ion-nav-title>
+      <img width="40" src="http://phomework.com.co/www/image/phome-ico.png">
+    </ion-nav-title-->
+    <ion-item style="background:#0c60ee;border:0px;width: 100%;opacity: 0.8; float: left;"></ion-item>
+    <div class="bar-positive">
+          <ion-item style="border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);width: 20%;opacity: 0.8; float: left;height: 60px;">
+              <img ng-click="go_panel()" style="width: 30px;float: left;padding-top:5px; " src="http://phomework.com.co/www/image/phome-ico.png">
+          </ion-item>  
+          <ion-item style="border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);width: 80%;opacity: 0.8;float: right;height: 60px;">
+              <div style="position: relative;right: 0px;">
+                  <div ng-click="go_cerrar()" style="width: 30px;float: right; padding:8px;padding-right:100px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-log-out"></i></div>
+                  <div ng-click="go_fqs()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-help-circled"></i></div>
+                  <div ng-click="go_misnotificaciones()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-android-notifications"></i></div>
+                  <div ng-click="go_miperfil()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-person"></i></div>
+              </div>
+          </ion-item>
+      </div>
+    <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 50px;" >
+
+        
+        <style>
+          .bar-positive{
+            border: 0px;
+          }
+        </style>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: right;">
+            Identificador Estudiante: {{ identificador.id }}<br>
+            Correo Estudiante: {{ identificador.correo }}
+        </ion-item>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8; float: left;">
+            <a ng-click="go_mistareas()" style="padding:10px;">
+                <img width="120" src="img/tarea.png" style="float: left;margin-right:10%"><label><br><br>Mis Tareas</label>
+            </a> 
+        </ion-item>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: left;">
+            <a ng-click="go_mistokens()" style="padding:10px;">
+                <img width="120" src="img/monedas.png" style="float: left;margin-right:10%"><label><br><br>Mis Tokens</label>
+            </a>
+        </ion-item>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: left;">
+            <a ng-click="go_subirtarea()" style="padding:10px;">
+                <img width="120" src="img/subir.png" style="float: left;margin-right:10%"><label><br><br>Subir Tarea</label>
+            </a>
+        </ion-item>
+        
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: right;">
+            <a ng-click="go_chatsoporte()" style="padding:10px;">
+                <img width="120" src="img/pregunta.png" style="float: left;margin-right:10%"><label><br><br>Soporte Técnico</label>
+            </a>
+        </ion-item>
+
+        <ion-item style="background:transparent;border:0px;width: 100%;opacity: 0.8;float: right;height: 200px;"></ion-item>
+        
+  
+  
+  <style>
+  #body1{
+    background-image: url('img/fondo5.jpg');
+    filter: blur(0px);
+  }
+  label{
+      color:black;
+  }
+  
+  
+  h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
+  .item-input{
+    background: white;
+    opacity: 0.7;
+  }
+  </style>
+  
+    </ion-content>
+    <div class="bar bar-footer bar-positive">
+        <div class="title" style="font-family: 'Kavivanar', cursive;">Estás en Phomework</div>
+      </div>
+  </ion-view>

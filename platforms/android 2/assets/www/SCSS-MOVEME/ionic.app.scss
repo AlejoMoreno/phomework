@@ -1,0 +1,60 @@
+$dark: #3E434B;
+$stable: #DADADA;
+$positive: #00B8FF;
+$link-color: $dark;
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+@import "../www/lib/ionic/scss";
+.top-container {
+	heightt: calc(100% - 96px);
+	margin: 0px;
+}
+
+.bottom-form {
+	position: absolute;
+	bottom: 0px;
+	display: block;
+	width: 100%;
+	background-color: white;
+	button {
+		margin: 0px !important;
+	}
+	
+}
+pre {
+	margin: 20px 0;
+	padding: 20px;
+}
+
+.round {
+	border-radius: 50%;
+}
+
+.avatar img {
+	display: block;
+	margin: 0 auto;
+}
+
+body {
+	color: #969696;
+}
+
+body.platform-ios {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.ionic-body.platform-ios {
+	font-family: 'Open Sans', sans-serif;
+}
+
+body.platform-android {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.ionic-body.platform-android {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.tab-item,input,button,select,textarea {
+	font-family: inherit;
+}
+

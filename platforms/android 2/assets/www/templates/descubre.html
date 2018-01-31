@@ -1,0 +1,54 @@
+<ion-view title="Contactos" hide-back-button="true" cache-view="false" id="page5">
+    <ion-content padding="true" id="body1" style="float:left;padding: 20px;padding-top: 100px;" >
+
+      <div class="bar-positive" style="position: absolute;left: -20px;top:-100px;width: 120%;padding:5px;border-color:#0c60ee;background-color:#387ef5;background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 80%);">
+        <img ng-click="go_panel()" style="width: 30px;float: left;padding-top:5px; " src="http://phomework.com.co/www/image/phome-ico.png">
+        <div ng-click="go_cerrar()" style="width: 30px;float: right; padding:8px;padding-right:100px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-log-out"></i></div>
+        <div ng-click="go_fqs()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-help-circled"></i></div>
+        <div ng-click="go_misnotificaciones()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-android-notifications"></i></div>
+        <div ng-click="go_miperfil()" style="width: 30px;float: right; padding:8px;font-size:25px;color:white;opacity: 0.5;"><i class="icon ion-person"></i></div>
+      </div>
+        <style>
+          .bar-positive{
+            border: 0px;
+          }
+        </style>
+
+        <ion-list style="border:0px;" ng-repeat="solicitud in solicitudes track by $index">
+          <ion-item  style="border: 0px;background: white;opacity: 0.8;">
+            <div ng-click="go_chat( solicitud.id_docente.idprofesores );">
+              <label style="float: left;padding-left: 15px;color:black">Póngase en contacto con el profe {{ solicitud.id_docente.idprofesores }} <br> por aquí antes de
+                habilitarlo </label>
+              <label style="float: right;padding-left: 15px;font-size: 50px;margin-top: -20px;color:black">
+                  <div  class="ion-chatbubble-working"></div>
+                </label><br><br>
+            </div>
+              
+              <label ng-click="habilitar( solicitud.id_tarea.idtareas , solicitud.id_docente.idprofesores )"  style="float: left;padding-left: 15px;width: 100%;padding-right: 15px;">
+                <div style="width: 100%;padding:10px;color:white; background: #207ce5;-webkit-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);
+                -moz-box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);
+                box-shadow: 2px 2px 1px 1px rgba(0,0,0,0.75);"><strong style="color:white">Quiero que el docente {{ solicitud.id_docente.idprofesores }} solucione mi tarea</strong></div>
+              </label>
+            </div>
+          </ion-item>
+        </ion-list>
+  
+  <style>
+     #body1{
+    background-image: url('img/fondo5.jpg');
+    filter: blur(0px);
+  }
+  h1,h2,h3{
+  font-family: 'Montserrat', sans-serif;
+}
+  .item-input{
+    background: white;
+    opacity: 0.7;
+  }
+  </style>
+  
+    </ion-content>
+    <div class="bar bar-footer bar-positive">
+      <div class="title" style="font-family: 'Kavivanar', cursive;">Estás en Phomework</div>
+      </div>
+  </ion-view>
