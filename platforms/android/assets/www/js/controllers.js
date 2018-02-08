@@ -1652,10 +1652,7 @@ angular.module('app.controllers', [])
                 $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
-                    if (r == true) {
-                        $scope.saveimage();
-                    }  
+                    $scope.saveimage(); 
                 }, function (err) {
                     console.log(err);
                 });
@@ -1680,10 +1677,7 @@ angular.module('app.controllers', [])
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     //$scope.saveimage($scope.imgURI);
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
-                    if (r == true) {
-                        $scope.saveimage();
-                    }  
+                    $scope.saveimage();
                 }, function (err) {
                     console.log(err);
                 });
@@ -2172,10 +2166,7 @@ angular.module('app.controllers', [])
                 $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
-                    if (r == true) {
-                        $scope.saveimage();
-                    }  
+                    $scope.saveimage();
                 }, function (err) {
                     console.log(err);
                 });
@@ -2200,10 +2191,7 @@ angular.module('app.controllers', [])
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     //$scope.saveimage($scope.imgURI);
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
-                    if (r == true) {
-                        $scope.saveimage();
-                    }  
+                   $scope.saveimage();
                 }, function (err) {
                     console.log(err);
                 });
@@ -2224,10 +2212,7 @@ angular.module('app.controllers', [])
                 //     }
                 //     reader.readAsDataURL(changeEvent.target.files[0]);
                 // });
-                var r = confirm("Se enviará esta foto. Esta de acuerdo?");
-                if (r == true) {
-                    $scope.saveimage();
-                }                
+                $scope.saveimage();               
             };
 
             $scope.saveimage = function () {
