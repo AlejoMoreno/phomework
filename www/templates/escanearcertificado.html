@@ -16,11 +16,11 @@
       <button id="escanear-button10" ng-click="folderFile()" class="button button-dark button-block icon-left ion-android-folder">Escoger imagen</button>
       <!--button id="escanear-button10" ng-click="send()" class="button button-dark button-block icon-left ion-android-camera">SEND foto</button-->
       <a onclick="window.open('http://phomework.com.co/www/', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">
-        <h4 class="button button-positive">Si usted desea enviar otro tipo de archivo diferente a una imagen, debe realizarlo desde la web.<br>Clic aquí para ir a la web</h4>
+        <h4 class="button button-positive">Si usted desea enviar otro tipo de archivo diferente a una imagen, ingrese aquí.</h4>
       </a>
       <a ng-click="go_checklist()" id="escanear-button19" class="button button-positive button-block icon-left ion-checkmark">TERMINAR</a>
       <div style="margin-left: -10px; width: calc(100% + 20px);">
-          <img src="{{ imgURI }}" style="display: block; margin-left: auto; margin-right: auto;">
+        <p>Data_Imagen: {{ imgURI }} </p>
         </div>
       <div id="check1" class="check">
                 </div>
