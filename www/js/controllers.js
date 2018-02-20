@@ -1604,7 +1604,8 @@ angular.module('app.controllers', [])
             $scope.file = {
                 'file': '',
                 'host': host,
-                'cont': 0
+                'cont': 0,
+                'img':''
             };
             console.log($scope.reclamo);
             $scope.respuesta = {
@@ -1652,7 +1653,14 @@ angular.module('app.controllers', [])
                 $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    $scope.saveimage(); 
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
+                    }  
+                    else{
+                        $scope.file.img = '';
+                    }  
                 }, function (err) {
                     console.log(err);
                 });
@@ -1677,7 +1685,14 @@ angular.module('app.controllers', [])
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     //$scope.saveimage($scope.imgURI);
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    $scope.saveimage();
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
+                    }  
+                    else{
+                        $scope.file.img = '';
+                    } 
                 }, function (err) {
                     console.log(err);
                 });
@@ -1701,7 +1716,11 @@ angular.module('app.controllers', [])
                 var r = confirm("Se enviará esta foto. Esta de acuerdo?");
                 if (r == true) {
                     $scope.saveimage();
-                }                
+                    $scope.file.img = $scope.imgURI;
+                }  
+                else{
+                    $scope.file.img = '';
+                }              
             };
 
             $scope.saveimage = function () {
@@ -1854,7 +1873,8 @@ angular.module('app.controllers', [])
             $scope.file = {
                 'file': '',
                 'host': host,
-                'cont': 0
+                'cont': 0,
+                'img':''
             };
             console.log($scope.reclamo);
             $scope.respuesta = {
@@ -1905,7 +1925,11 @@ angular.module('app.controllers', [])
                     var r = confirm("Se enviará esta foto. Esta de acuerdo?");
                     if (r == true) {
                         $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
                     }  
+                    else{
+                        $scope.file.img = '';
+                    }
                 }, function (err) {
                     console.log(err);
                 });
@@ -1933,7 +1957,11 @@ angular.module('app.controllers', [])
                     var r = confirm("Se enviará esta foto. Esta de acuerdo?");
                     if (r == true) {
                         $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
                     }  
+                    else{
+                        $scope.file.img = '';
+                    }
                 }, function (err) {
                     console.log(err);
                 });
@@ -1957,7 +1985,11 @@ angular.module('app.controllers', [])
                 var r = confirm("Se enviará esta foto. Esta de acuerdo?");
                 if (r == true) {
                     $scope.saveimage();
-                }                
+                    $scope.file.img = $scope.imgURI;
+                }  
+                else{
+                    $scope.file.img = '';
+                }               
             };
 
             $scope.saveimage = function () {
@@ -2118,7 +2150,8 @@ angular.module('app.controllers', [])
             $scope.file = {
                 'file': '',
                 'host': host,
-                'cont': 0
+                'cont': 0,
+                'img':''
             };
             console.log($scope.reclamo);
             $scope.respuesta = {
@@ -2166,7 +2199,14 @@ angular.module('app.controllers', [])
                 $cordovaCamera.getPicture(cameraOptions).then(function (imageData) {
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                    $scope.saveimage();
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
+                    }  
+                    else{
+                        $scope.file.img = '';
+                    } 
                 }, function (err) {
                     console.log(err);
                 });
@@ -2191,7 +2231,14 @@ angular.module('app.controllers', [])
                     $scope.imgURI = "data:image/jpeg;base64," + imageData;
                     //$scope.saveimage($scope.imgURI);
                     $scope.respuesta.foto = "data:image/jpeg;base64," + imageData;
-                   $scope.saveimage();
+                    var r = confirm("Se enviará esta foto. Esta de acuerdo?");
+                    if (r == true) {
+                        $scope.saveimage();
+                        $scope.file.img = $scope.imgURI;
+                    }  
+                    else{
+                        $scope.file.img = '';
+                    } 
                 }, function (err) {
                     console.log(err);
                 });
